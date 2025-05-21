@@ -4,6 +4,6 @@ export default function Home() {
 
 
   return (
-    <div>hello</div>
+    <Button variant="destructive">Button</Button>
   );
 }
