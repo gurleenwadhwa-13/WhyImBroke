@@ -10,6 +10,7 @@ import {
   SignedOut,
   UserButton,
 } from '@clerk/nextjs'
+import { dark } from "@clerk/themes"
 
 export const metadata: Metadata = {
   title: "Broke Grad",
@@ -24,26 +25,37 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      appearance={{
+        baseTheme: dark,
+      }}
+    >
       <html lang="en">
         <body className={`${inter.className}`}>
+          {/** Header Starts */}
           <Header />
-            <header className="flex justify-end items-center p-4 gap-4 h-16">
-              <SignedOut>
-                <SignInButton />
-                <SignUpButton />
-              </SignedOut>
-              <SignedIn>
-                <UserButton />
-              </SignedIn>
-            </header>
+          <header className="flex justify-end items-center p-4 gap-4 h-16">
+            <SignedOut>
+              <SignInButton />
+              <SignUpButton />
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+          </header>
+          {/** Header Ends */}
+
+          {/** Main Starts */}
           <main className="min-h-screen">{children}</main>
-          {/* {footer} */}
+          {/** Main Ends */}
+
+          {/* Footer Starts */}
           <footer className="bg-blue-50 py-12">
             <div className="container mx-auto px-4 text-center ">
               <p> Made with love by Gurleen using NextJS</p>
             </div>
           </footer>
+          {/* Footer Ends */}
         </body>
       </html>
     </ClerkProvider>
