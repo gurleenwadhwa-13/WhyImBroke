@@ -120,3 +120,44 @@
     @apply bg-background text-foreground;
   }
 }
+
+@utility gradient {
+  @apply bg-gradient-to-br from-blue-600 to-purple-600;
+}
+
+@utility gradient-title {
+  @apply gradient font-extrabold pr-2 pb-2 tracking-tighter text-transparent bg-clip-text;
+}
+
+/* @utility hero-image {
+  transform: rotate-x-15 scale-1;
+  transition: transform 0.5s ease-out;
+  will-change: transform;
+}
+
+@utility hero-image.scrolled {
+  transform: rotate-x-0 scale-1 -translate-y-40
+} */
+
+/* @utility hero-image {
+  transform: rotateX(15deg) scale(1);
+  transition: transform 0.5s ease-out;
+  will-change: transform;
+} */
+
+/* For state-based utilities, you might need to use @layer utilities */
+@layer utilities {
+  .hero-image-wrapper {
+    perspective:1000px
+  }
+  
+  .hero-image {
+    transform: rotateX(15deg) scale(1);
+    transition: transform 0.5s ease-out;
+    will-change: transform;
+  }
+
+  .hero-image.scrolled {
+    transform: rotateX(0deg) scale(1) translateY(40);
+  }
+}

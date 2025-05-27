@@ -26,9 +26,6 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider
-      appearance={{
-        baseTheme: dark,
-      }}
     >
       <html lang="en">
         <body className={`${inter.className}`}>
