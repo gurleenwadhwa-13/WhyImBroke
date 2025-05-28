@@ -4,8 +4,8 @@ import { statsData } from '@/data/landing-data'
 const StatsData = () => {
   return (
     <>
-    <section className='py-20 bg-blue-50'>
-        <div className='container mx-auto px-4'>
+    <section className='mx-auto py-20 bg-blue-50'>
+        <div className='container mx-auto px-2'>
             <div className='grid grid-cols-2 md:grid-cols-4 gap-8'>
                 {statsData.map((data, index) => {
                     return (
