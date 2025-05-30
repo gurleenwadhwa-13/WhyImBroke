@@ -3,7 +3,7 @@ import DashboardPage from './page'
 
 const DashboardLayout = () => {
   return (
-    <div>
+    <div className=''>
         <DashboardPage />
     </div>
   )
