@@ -1,17 +1,14 @@
-import React, { Suspense } from 'react'
+import React, { PropsWithChildren, Suspense } from 'react'
 import DashboardPage from './page'
 import { BarLoader } from 'react-spinners'
 
-const DashboardLayout = () => {
+const DashboardLayout = ({children}: PropsWithChildren) => {
   return (
-    <div className='container mx-auto text-5xl gradient-title font-bold px-5'>
-       <h1> Dashboard</h1>
-       <Suspense 
-        fallback={<BarLoader className='mt-4' width="100%" color='blue'/>}
-        >
-        <DashboardPage />
+    <div className='container mx-auto px-5'>
+       <h1 className='text-5xl font-bold gradient-title'> Dashboard</h1>
+       <Suspense fallback={<BarLoader className='mt-4' width="100%" color='blue'/>} >
+       {children}
        </Suspense>
-       
     </div>
   )
 }
