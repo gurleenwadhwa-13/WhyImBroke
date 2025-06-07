@@ -29,7 +29,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
-const CreateAccountDrawer = ({children}: PropsWithChildren) => {
+export default function CreateAccountDrawer ({children}: PropsWithChildren){
   const [openDrawer, setOpenDrawer]= useState(false);
 
   const {
@@ -46,7 +46,7 @@ const CreateAccountDrawer = ({children}: PropsWithChildren) => {
     }
   });
 
-  const onSubmit = (data: FieldValues) => {
+  const onSubmit = async (data: FieldValues) => {
     //Here we do the API call for the onSubmit Action
     console.log(data);
     window.alert("Testing this func, data printed in console")
@@ -161,5 +161,3 @@ const CreateAccountDrawer = ({children}: PropsWithChildren) => {
     </Drawer>
   )
 }
-
-export default CreateAccountDrawer
