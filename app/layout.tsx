@@ -10,6 +10,7 @@ import {
   SignedOut,
   UserButton,
 } from '@clerk/nextjs'
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "Broke Grad",
@@ -43,6 +44,7 @@ export default function RootLayout({
 
           {/** Main Starts */}
           <main className="min-h-screen">{children}</main>
+          <Toaster richColors/>
           {/** Main Ends */}
 
           {/* Footer Starts */}
