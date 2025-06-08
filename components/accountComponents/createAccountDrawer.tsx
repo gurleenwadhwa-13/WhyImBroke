@@ -29,7 +29,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import useFetch from "@/hooks/useFetch"
-import { createAccount } from "@/actions/account/createAccount"
+import { createAccount } from "@/actions/account/create"
 import { Loader2 } from "lucide-react"
 import { toast } from "sonner"
 
