@@ -4,6 +4,7 @@ import { Prisma } from "@/lib/generated/prisma"
 import { serializePrisma } from "@/lib/helpers/prisma-helpers";
 import { db } from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server"
+import { revalidatePath } from "next/cache";
 
 // type CreateAccountInputType = Prisma.AccountCreateInput
 type CreateAccountInputType = Omit<Prisma.AccountUncheckedCreateInput, 'userId' | 'id' | 'createdAt' | 'updatedAt'>
@@ -65,10 +66,9 @@ export async function createAccount(data: CreateAccountInputType){
                 isDefault: shouldBeDefault
             }
         })
+        revalidatePath("/dashboard")
 
-        return serializePrisma( newAccount);
-
-
+        return {success: true, data: serializePrisma( newAccount)};
     } catch (error) {
         console.error("Error creating account:", error);
         // Always re-throw the error so useFetch can catch it
