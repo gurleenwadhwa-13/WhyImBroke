@@ -4,7 +4,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 
 function useFetch<TArgs extends any[], TResult>(
-    fn: (...args: TArgs) => Promise<TResult>
+    serverAction: (...args: TArgs) => Promise<TResult>
 ){
 
     const [data, setData] = useState<TResult | undefined>(undefined);
@@ -16,7 +16,7 @@ function useFetch<TArgs extends any[], TResult>(
         setError(null);
 
         try {
-            const response = await fn(...args);
+            const response = await serverAction(...args);
             setData(response);
         } catch (err: any) {
             setError(err);
