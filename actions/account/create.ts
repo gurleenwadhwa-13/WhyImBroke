@@ -5,12 +5,14 @@ import { serializePrisma } from "@/lib/helpers/prisma-helpers";
 import { db } from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server"
 
-type CreateAccountInputType = Prisma.AccountCreateInput
+// type CreateAccountInputType = Prisma.AccountCreateInput
+type CreateAccountInputType = Omit<Prisma.AccountUncheckedCreateInput, 'userId' | 'id' | 'createdAt' | 'updatedAt'>
 
 export async function createAccount(data: CreateAccountInputType){
     try {
         // Check if the user is logged in or not?
         const { userId } = await auth();
+        console.log("Inside the Server Action for CreateAccount")
         console.log(userId);
         if(!userId) throw new Error("UnAuthorized");
 
@@ -51,11 +53,14 @@ export async function createAccount(data: CreateAccountInputType){
             })
         }
 
+        // Filter out fields that shouldn't be in the create data
+        const { user: _user, transactions: _transactions, ...filteredData } = data as any;
+
         // We can now finally create a new account since we have all the required info
         const newAccount = await db.account.create({
             data: {
-                ...data,
-                // userId: user.id,
+                ...filteredData,
+                userId: user.id,
                 balance: balanceFloat,
                 isDefault: shouldBeDefault
             }
@@ -65,6 +70,8 @@ export async function createAccount(data: CreateAccountInputType){
 
 
     } catch (error) {
-        console.log(error)
+        console.error("Error creating account:", error);
+        // Always re-throw the error so useFetch can catch it
+        throw error;
     }
 }

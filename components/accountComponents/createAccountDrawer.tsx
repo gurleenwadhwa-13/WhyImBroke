@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, PropsWithChildren } from "react"
+import { useState, PropsWithChildren, use, useEffect } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { FieldValues, useForm } from "react-hook-form"
 
@@ -28,6 +28,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import useFetch from "@/hooks/useFetch"
+import { createAccount } from "@/actions/account/createAccount"
+import { Loader2 } from "lucide-react"
+import { toast } from "sonner"
 
 export default function CreateAccountDrawer ({children}: PropsWithChildren){
   const [openDrawer, setOpenDrawer]= useState(false);
@@ -35,7 +39,7 @@ export default function CreateAccountDrawer ({children}: PropsWithChildren){
   const {
     register,
     handleSubmit,
-    formState: {errors, isSubmitting},
+    formState: {errors},
     watch,
     reset,
     setValue
@@ -46,11 +50,33 @@ export default function CreateAccountDrawer ({children}: PropsWithChildren){
     }
   });
 
+  const {
+    data: newAccount,
+    loading: createAccountLoading,
+    error: createAccountErrors,
+    func: createAccountFn,
+  } = useFetch(createAccount)
+
+  // Detecting new Account Creation
+  useEffect(() => {
+    if (newAccount && !createAccountLoading){
+        toast.success("Account Created Successfully");
+        reset(),
+        setOpenDrawer(false);
+    }
+  }, [newAccount, createAccountLoading])
+
+  // Detecting errors via Toast
+  useEffect(() => {
+    if (createAccountErrors){
+        toast.error(createAccountErrors?.message || "Failed to create Account")
+
+    }
+  }, [createAccountErrors])
+
+  // Here we do the API call for the onSubmit Action
   const onSubmit = async (data: FieldValues) => {
-    //Here we do the API call for the onSubmit Action
-    console.log(data);
-    window.alert("Testing this func, data printed in console")
-    reset();
+    await createAccountFn(data)
   }
 
     return (
@@ -153,7 +179,16 @@ export default function CreateAccountDrawer ({children}: PropsWithChildren){
                                 Cancel
                             </Button>
                         </DrawerClose>
-                        <Button type="submit" variant="default" className="flex-1">Create Account</Button>
+                        <Button type="submit" variant="default" className="flex-1" disabled={createAccountLoading}>
+                            {createAccountLoading ? (
+                                <>
+                                <Loader2 className="mr-2 animate-spin"/>
+                                Creating...
+                                </>
+                            ) : (
+                                "Create Account"
+                            )}
+                        </Button>
                     </div>
                 </form>
             </div>
