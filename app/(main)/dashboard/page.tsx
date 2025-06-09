@@ -3,7 +3,7 @@ import CreateAccountDrawer from "@/components/accountComponents/createAccountDra
 import { Card, CardContent, CardDescription } from "@/components/ui/card"
 import { Plus } from "lucide-react"
 import { FetchAccounts } from "@/actions/account/fetch-account"
-import AccountCard from "@/app/(main)/dashboard/_components/account-card"
+import AccountCard from "@/app/(main)/dashboard/_components/AccountCard"
 
 export async function DashboardPage () {
   const { data: accounts} = await FetchAccounts();
