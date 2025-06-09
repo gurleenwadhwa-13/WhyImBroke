@@ -58,7 +58,6 @@ export async function updateDefaultAccount (accountId: string) {
 
         if(!user || user === undefined){
             throw new Error("User does not exist");
-
         }
 
         //We converted all other accounts be non-Default Accounts now.

@@ -19,6 +19,7 @@ export default function AccountCard({ account }: TAccountProps) {
     data: updatedAccount,
     func: updateDefaultAccountFn,
     loading: updateDefaultLoading,
+    error
   } = useFetch(updateDefaultAccount)
 
   const handleDefaultAccountChange = async (event: any) => {
@@ -33,6 +34,7 @@ export default function AccountCard({ account }: TAccountProps) {
     await updateDefaultAccountFn(id)
   }
 
+  //Handling the success event after we updated the default status of an account
   useEffect(() => {
     if (updatedAccount?.success){
         toast.success("Default Account Changed", {
@@ -40,6 +42,15 @@ export default function AccountCard({ account }: TAccountProps) {
         })
     }
   }, [updatedAccount, updateDefaultLoading])
+
+  //Handling the error event we get while updating the default status of an account
+  useEffect(() => {
+    if (error){
+        toast.error(error.message || "An Error Occured", {
+            position: "top-center"
+        })
+    }
+  }, [error])
 
 
   const formatBalance = (balance: any) => {
