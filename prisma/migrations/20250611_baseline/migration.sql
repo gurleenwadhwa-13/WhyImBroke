@@ -8,7 +8,7 @@ CREATE TYPE "CurrencyList" AS ENUM ('CAD', 'USD', 'INR');
 CREATE TYPE "TransactionType" AS ENUM ('EXPENSE', 'INCOME');
 
 -- CreateEnum
-CREATE TYPE "RecurringIntervalList" AS ENUM ('DAILY', 'WEEKLY', 'BIWEEKLY', 'MONTHLY', 'YEARLY');
+CREATE TYPE "RecurringIntervalList" AS ENUM ('DAILY', 'WEEKLY', 'BIWEEKLY', 'MONTHLY', 'YEARLY', 'NONE');
 
 -- CreateEnum
 CREATE TYPE "TransactionStatus" AS ENUM ('PENDING', 'COMPLETED', 'FAILED');
@@ -51,7 +51,7 @@ CREATE TABLE "transactions" (
     "category" TEXT NOT NULL,
     "receiptURL" TEXT,
     "isRecurring" BOOLEAN NOT NULL DEFAULT false,
-    "recurringInterval" "RecurringIntervalList" NOT NULL,
+    "recurringInterval" "RecurringIntervalList",
     "nextRecurringDate" TIMESTAMP(3),
     "lastProcessed" TIMESTAMP(3),
     "status" "TransactionStatus" NOT NULL DEFAULT 'COMPLETED',
@@ -100,10 +100,11 @@ CREATE INDEX "budgets_userId_idx" ON "budgets"("userId");
 ALTER TABLE "accounts" ADD CONSTRAINT "accounts_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "transactions" ADD CONSTRAINT "transactions_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
 ALTER TABLE "transactions" ADD CONSTRAINT "transactions_accountId_fkey" FOREIGN KEY ("accountId") REFERENCES "accounts"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "transactions" ADD CONSTRAINT "transactions_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "budgets" ADD CONSTRAINT "budgets_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
