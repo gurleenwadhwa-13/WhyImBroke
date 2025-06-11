@@ -5,7 +5,7 @@ import { Account } from "@/lib/generated/prisma"
 import useFetch from "@/hooks/useFetch"
 
 import { toast } from "sonner"
-import { updateDefaultAccount } from "@/actions/account/fetch-account"
+import { updateDefaultAccount } from "@/actions/account/update-account"
 import AccountCardView from "./AccountCardView"
 
 type TAccountProps = {
