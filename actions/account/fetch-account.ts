@@ -2,7 +2,6 @@
 
 import { db } from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
-import { revalidatePath } from "next/cache";
 import { serializePrisma } from "@/lib/helpers/prisma-helpers";
 
 export async function FetchAccounts () {
@@ -44,7 +43,7 @@ export async function FetchAccounts () {
     }
 }
 
-export async function updateDefaultAccount (accountId: string) {
+export async function getAccountWithTransactions(accountId: string) {
     try {
         // Checking User Auth
         const { userId } = await auth();
@@ -60,23 +59,30 @@ export async function updateDefaultAccount (accountId: string) {
             throw new Error("User does not exist");
         }
 
-        //We converted all other accounts be non-Default Accounts now.
-        await db.account.updateMany({
-            where: { userId: user.id, isDefault: true},
-            data: {isDefault: false}
+        const accounts = await db.account.findUnique({
+            where: { id: accountId, userId: user.id },
+            include: {
+                transactions: {
+                    orderBy: { date: "desc" }
+                },
+                _count: {
+                    select: {transactions: true}
+                }
+            }
         })
 
-        const account = await db.account.update({
-            where: {id: accountId, userId: user.id},
-            data: {isDefault: true}
-        })
+        if(!accounts) {
+            return null;
+        }
 
-        revalidatePath("/dashboard");
-        return {success: true, data: serializePrisma(account)};
+        const serializedAccounts = serializePrisma(accounts);
 
+        return { success: true, data: {
+            ...serializedAccounts,
+            transactions: accounts.transactions.map(serializePrisma)
+        }};
     } catch (error) {
-        console.error("Error in fetching accounts", error);
-        throw error
+        console.error("Error in fetching accounts with their transactions");
+        throw error;
     }
-
 }
