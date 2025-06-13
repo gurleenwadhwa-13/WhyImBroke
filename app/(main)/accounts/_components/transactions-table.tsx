@@ -1,17 +1,19 @@
 "use client"
 
 import { Transaction } from '@/lib/generated/prisma'
+import { format } from 'date-fns'
 
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
 import { Checkbox } from '@/components/ui/checkbox'
+import { categoryColors } from '@/data/categories'
+
 
 const TransactionsTable = ({ transactions }: { transactions: Transaction[]} ) => {
 
@@ -21,14 +23,18 @@ const TransactionsTable = ({ transactions }: { transactions: Transaction[]} ) =>
     console.log(parameter);
   }
 
+  const setSelectAllItems = () => {
+    console.log("")
+  }
+
   return (
-    <div className='mx-auto space-y-4'>
+    <div className='mx-auto space-y-4 container border-1'>
         <Table>
-        {/* <TableCaption>All Transactions</TableCaption> */}
+        {/* Table Headers */}
         <TableHeader>
             <TableRow>
             <TableHead className='w-auto'>
-                <Checkbox/>
+                <Checkbox onClick={() => setSelectAllItems()}/>
             </TableHead>
             <TableHead
                 className="w-[100px] cursor-pointer font-bold"
@@ -53,25 +59,39 @@ const TransactionsTable = ({ transactions }: { transactions: Transaction[]} ) =>
             <TableHead></TableHead>
             </TableRow>
         </TableHeader>
+
+        {/* Table Body Section */}
         <TableBody>
-            {formattedTransactionsData.length === 0 ? (
+            {formattedTransactionsData.length === 0 ? (   //We render this first conditional when there is no transactions
                 <TableRow>
                     <TableCell colSpan={7} className='text-center text-muted-foreground'>
                         <span>No Transactions found</span>
                     </TableCell>
                 </TableRow>
             ) : (
-            formattedTransactionsData.map((item, index) => {
-                    return (
-                        <TableRow key={index}>
-                            <TableCell> <Checkbox/> </TableCell>
-                            <TableCell className="font-medium">{}</TableCell>
-                            <TableCell>{item.description}</TableCell>
-                            <TableCell>Credit Card</TableCell>
-                            <TableCell className="text-right">$250.00</TableCell>
-                        </TableRow>
-                    )
-                })
+              formattedTransactionsData.map((transaction) => (
+                <TableRow key={transaction.id}>
+                    <TableCell> <Checkbox/> </TableCell>
+                    <TableCell className="font-medium">
+                        {format(transaction.date, "PPP")}
+                    </TableCell>
+                    <TableCell>{transaction.description}</TableCell>
+                    <TableCell className="capitalize">
+                        <span
+                            style={{
+                                background: categoryColors[transaction.category],
+                            }}
+                            className='px-2 py-1 rounded-2xl text-white'
+                        >
+                            {transaction.category}
+                        </span>
+                    </TableCell>
+                    <TableCell className="text-right" style={{color: transaction.type === "EXPENSE" ? "red" : "blue"}}>
+                        {transaction.type === "EXPENSE" ? "-" : "+"}
+                        ${transaction.amount.toFixed(2)}
+                    </TableCell>
+                </TableRow>
+              ))
             )}
         </TableBody>
         </Table>

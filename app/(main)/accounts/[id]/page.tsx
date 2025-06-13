@@ -21,7 +21,7 @@ export default async function AccountsPage ({params}: {params: {id: string } }){
         <p className="text-2xl justify-around text-gray-500"> {accountsInfo.type.charAt(0) + accountsInfo.type.slice(1).toLowerCase()} Account </p>
       </div>
 
-      <div className="text-center justify-center space-x-3">
+      <div className="text-center justify-center space-x-3 pb-4">
         <div className="text-3xl font-medium">${parseFloat((accountsInfo.balance).toString()).toFixed(2)}</div>
         <p className="text-gray-500">{accountsInfo._count.transactions} Transactions</p>
       </div>
