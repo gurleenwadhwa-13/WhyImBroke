@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/table"
 import { Checkbox } from '@/components/ui/checkbox'
 import { categoryColors } from '@/data/categories'
-
+import { renderRecurringBadge } from './render-recurring-badge'
 
 const TransactionsTable = ({ transactions }: { transactions: Transaction[]} ) => {
 
@@ -50,7 +50,7 @@ const TransactionsTable = ({ transactions }: { transactions: Transaction[]} ) =>
                 <div>Category</div>
             </TableHead>
             <TableHead
-                className='cursor-pointer text-right font-bold w-[200px]'
+                className='cursor-pointer text-right font-bold w-[170px] pr-4'
                 onClick={() => handleSort("amount")}
             >
                 <div>Amount</div>
@@ -86,10 +86,11 @@ const TransactionsTable = ({ transactions }: { transactions: Transaction[]} ) =>
                             {transaction.category}
                         </span>
                     </TableCell>
-                    <TableCell className="text-right" style={{color: transaction.type === "EXPENSE" ? "red" : "blue"}}>
+                    <TableCell className="text-right pr-5" style={{color: transaction.type === "EXPENSE" ? "red" : "blue"}}>
                         {transaction.type === "EXPENSE" ? "-" : "+"}
                         ${transaction.amount.toFixed(2)}
                     </TableCell>
+                    <TableCell>{renderRecurringBadge(transaction)}</TableCell>
                 </TableRow>
               ))
             )}
