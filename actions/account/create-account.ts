@@ -6,15 +6,12 @@ import { db } from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server"
 import { revalidatePath } from "next/cache";
 
-// type CreateAccountInputType = Prisma.AccountCreateInput
 type CreateAccountInputType = Omit<Prisma.AccountUncheckedCreateInput, 'userId' | 'id' | 'createdAt' | 'updatedAt'>
 
 export async function createAccount(data: CreateAccountInputType){
     try {
         // Check if the user is logged in or not?
         const { userId } = await auth();
-        console.log("Inside the Server Action for CreateAccount")
-        console.log(userId);
         if(!userId) throw new Error("UnAuthorized");
 
         //check if the user is a valid entry in the db
