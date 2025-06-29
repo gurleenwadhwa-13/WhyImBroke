@@ -1,7 +1,7 @@
 import { getAccountWithTransactions } from "@/actions/account/fetch-account";
 import { notFound } from "next/navigation";
 import AccountBarChart from "@/components/accountComponents/accountBarChart";
-import TransactionsTable from "../_components/transactions-table";
+import TransactionsTable from "../../transactions/_components/transactions-table";
 
 
 export default async function AccountsPage ({params}: {params: {id: string } }){

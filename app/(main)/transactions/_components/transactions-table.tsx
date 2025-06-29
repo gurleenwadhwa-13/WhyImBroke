@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from 'react'
 import { Transaction } from '@/lib/generated/prisma'
 import { format } from 'date-fns'
 
@@ -11,20 +12,53 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 import { Checkbox } from '@/components/ui/checkbox'
 import { categoryColors } from '@/data/categories'
 import { renderRecurringBadge } from './render-recurring-badge'
+import { ChevronDown, ChevronUp, EllipsisVertical } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import useFetch from '@/hooks/useFetch'
+import { deleteTransactions } from '@/actions/transactions/delete-transactions'
 
 const TransactionsTable = ({ transactions }: { transactions: Transaction[]} ) => {
+  const router = useRouter();
+  const [selectedIds, setSelectedIds] = useState([]);
+  const [sortConfig, setSortConfig] = useState({
+    field: "date",
+    direction: "desc"
+  });
+
+  const {
+    data: newAccount,
+    loading: createAccountLoading,
+    error: createAccountErrors,
+    func: createAccountFn,
+  } = useFetch(deleteTransactions);
 
   const formattedTransactionsData = transactions;
 
-  const handleSort = (parameter: string) => {
-    console.log(parameter);
+  const handleSort = (field: string) => {
+    setSortConfig( (current) => ({
+        field,
+        direction: current.field == field && current.direction === "asc" ? "desc" : "asc"
+    }));
   }
 
   const setSelectAllItems = () => {
     console.log("")
+  }
+
+  const handleDeleteTransactions = (transactions: string[]) => {
+    console.log("Deleting all Transactions");
+
   }
 
   return (
@@ -40,7 +74,10 @@ const TransactionsTable = ({ transactions }: { transactions: Transaction[]} ) =>
                 className="w-[100px] cursor-pointer font-bold"
                 onClick={() => handleSort("date")}
             >
-                <div>Date</div>
+                <div>Date {sortConfig.field === "date" && (
+                    sortConfig.direction === "asc" ? <ChevronUp className='m-2 h-3 w-3'/> : <ChevronDown className='ml-2 h-2 w-2'/>
+                    )}
+                </div>
             </TableHead>
             <TableHead className='font-bold w-[300px]'>Description</TableHead>
             <TableHead
@@ -91,6 +128,22 @@ const TransactionsTable = ({ transactions }: { transactions: Transaction[]} ) =>
                         ${transaction.amount.toFixed(2)}
                     </TableCell>
                     <TableCell>{renderRecurringBadge(transaction)}</TableCell>
+                    <TableCell>
+                        <DropdownMenu>
+                            <DropdownMenuTrigger>
+                            <EllipsisVertical/>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent>
+                            <DropdownMenuLabel onClick={() => {
+                                router.push(`/transaction/create?edit=${transaction.id}`)
+                            }}>
+                                Edit
+                            </DropdownMenuLabel>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem variant="destructive" onClick={() => handleDeleteTransactions([transaction.id])}>Delete</DropdownMenuItem>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                    </TableCell>
                 </TableRow>
               ))
             )}
