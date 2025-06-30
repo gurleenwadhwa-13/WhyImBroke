@@ -3,7 +3,7 @@
 import { db } from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 
-export async function deleteTransactions (transactionsIds: string[]) {
+export default async function deleteTransactions (transactionsIds: string[]) {
     console.log("Inside the deleteTransactions() server action");
     console.log("Printing the output of Transactions Ids:");
     console.log(transactionsIds);
