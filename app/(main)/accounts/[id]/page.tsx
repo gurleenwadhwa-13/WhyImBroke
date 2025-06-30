@@ -3,10 +3,14 @@ import { notFound } from "next/navigation";
 import AccountBarChart from "@/components/accountComponents/accountBarChart";
 import TransactionsTable from "../../transactions/_components/transactions-table";
 
+type Props = {
+  params: Promise<{
+    id: string;
+  }>;
+};
 
-export default async function AccountsPage ({params}: {params: {id: string } }){
-  const id = params.id
-
+export default async function AccountsPage ({params}: Props){
+  const { id } = await params;
   const accountData = await getAccountWithTransactions(id);
 
   if(!accountData) return notFound()
