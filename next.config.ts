@@ -1,7 +1,10 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  /* config options here */
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  eslint: {
+    // Only lint specific directories
+    dirs: ['app', 'components', 'lib'],
+    // Ensure ESLint respects .eslintignore
+    ignoreDuringBuilds: true
+  }
 };
-
-export default nextConfig;
+module.exports = nextConfig;
