@@ -25,8 +25,8 @@ import { categoryColors } from '@/data/categories'
 import { renderRecurringBadge } from './render-recurring-badge'
 import { ChevronDown, ChevronUp, EllipsisVertical } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import useFetch from '@/hooks/useFetch'
-import { deleteTransactions } from '@/actions/transactions/delete-transactions'
+// import useFetch from '@/hooks/useFetch'
+// import { deleteTransactions } from '@/actions/transactions/delete-transactions'
 import { toast } from "sonner"
 
 const TransactionsTable = ({ transactions }: { transactions: Transaction[]} ) => {
@@ -37,12 +37,12 @@ const TransactionsTable = ({ transactions }: { transactions: Transaction[]} ) =>
     direction: "desc"
   });
 
-  const {
-    data: deletedAccounts,
-    loading: deleteAccountLoading,
-    error: deleteAccountErrors,
-    func: AccountFn,
-  } = useFetch(deleteTransactions);
+//   const {
+//     data: deletedAccounts,
+//     loading: deleteAccountLoading,
+//     error: deleteAccountErrors,
+//     func: AccountFn,
+//   } = useFetch(deleteTransactions);
 
   const formattedTransactionsData = transactions;
 
