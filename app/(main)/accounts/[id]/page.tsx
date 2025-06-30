@@ -5,8 +5,7 @@ import TransactionsTable from "../../transactions/_components/transactions-table
 
 
 export default async function AccountsPage ({params}: {params: {id: string } }){
-  const paramsResolved = await params;
-  const id = paramsResolved.id;
+  const id = params.id
 
   const accountData = await getAccountWithTransactions(id);
 
