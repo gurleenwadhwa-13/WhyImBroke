@@ -5,7 +5,7 @@ import CreateAccountDrawer from "@/components/accountComponents/createAccountDra
 import { Card, CardContent, CardDescription } from "@/components/ui/card"
 import { Plus } from "lucide-react"
 
-export async function DashboardPage () {
+export default async function DashboardPage () {
   const { data: accounts} = await FetchAccounts();
 
   return (
@@ -33,5 +33,3 @@ export async function DashboardPage () {
     </div>
   )
 }
-
-export default DashboardPage
