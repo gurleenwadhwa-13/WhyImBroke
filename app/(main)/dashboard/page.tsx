@@ -5,6 +5,9 @@ import CreateAccountDrawer from "@/components/accountComponents/createAccountDra
 import { Card, CardContent, CardDescription } from "@/components/ui/card"
 import { Plus } from "lucide-react"
 
+// Force dynamic rendering to allow Clerk's auth
+export const dynamic = 'force-dynamic';
+
 export default async function DashboardPage () {
   const { data: accounts} = await FetchAccounts();
 
