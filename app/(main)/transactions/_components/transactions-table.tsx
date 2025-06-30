@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Transaction } from '@/lib/generated/prisma'
 import { format } from 'date-fns'
 
@@ -27,20 +27,21 @@ import { ChevronDown, ChevronUp, EllipsisVertical } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import useFetch from '@/hooks/useFetch'
 import { deleteTransactions } from '@/actions/transactions/delete-transactions'
+import { toast } from "sonner"
 
 const TransactionsTable = ({ transactions }: { transactions: Transaction[]} ) => {
   const router = useRouter();
-  const [selectedIds, setSelectedIds] = useState([]);
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [sortConfig, setSortConfig] = useState({
     field: "date",
     direction: "desc"
   });
 
   const {
-    data: newAccount,
-    loading: createAccountLoading,
-    error: createAccountErrors,
-    func: createAccountFn,
+    data: deletedAccounts,
+    loading: deleteAccountLoading,
+    error: deleteAccountErrors,
+    func: AccountFn,
   } = useFetch(deleteTransactions);
 
   const formattedTransactionsData = transactions;
@@ -48,18 +49,46 @@ const TransactionsTable = ({ transactions }: { transactions: Transaction[]} ) =>
   const handleSort = (field: string) => {
     setSortConfig( (current) => ({
         field,
-        direction: current.field == field && current.direction === "asc" ? "desc" : "asc"
+        direction: current.field === field && current.direction === "desc" ? "asc" : "desc"
     }));
   }
 
-  const setSelectAllItems = () => {
-    console.log("")
+  const handleSelect = (id: string) => {
+    setSelectedIds(currentArr => currentArr.includes(id) ? (
+        currentArr.filter(item => item != id)
+    ) : (
+        [...currentArr, id]
+    ))
+  }
+
+  const selectedItemsInfo = (selectedIds: string[]) => {
+    toast.info(`selected ${selectedIds.length} transactions`, {
+        position: "top-center",
+    })
+  }
+
+  const handleSelectAll = () => {
+    //Either select all Ids when clicked or Deselect all of them
+    if(selectedIds.length === transactions.length){
+        setSelectedIds([]);
+    }else {
+        const allIdsArr = transactions.map(t => t.id);
+        console.log(allIdsArr);
+        setSelectedIds(allIdsArr);
+    }
   }
 
   const handleDeleteTransactions = (transactions: string[]) => {
     console.log("Deleting all Transactions");
 
   }
+
+  useEffect(() => {
+    if (selectedIds.length === 0) return;
+    toast.info(`Selected ${selectedIds.length} transactions`, {
+        position: "top-center",
+    })
+  }, [selectedIds])
 
   return (
     <div className='mx-auto space-y-4 container border-1'>
@@ -68,14 +97,18 @@ const TransactionsTable = ({ transactions }: { transactions: Transaction[]} ) =>
         <TableHeader>
             <TableRow>
             <TableHead className='w-auto'>
-                <Checkbox onClick={() => setSelectAllItems()}/>
+                <Checkbox
+                    onCheckedChange={() => handleSelectAll()}
+                    checked={selectedIds.length === transactions.length}
+                />
             </TableHead>
             <TableHead
                 className="w-[100px] cursor-pointer font-bold"
                 onClick={() => handleSort("date")}
             >
-                <div>Date {sortConfig.field === "date" && (
-                    sortConfig.direction === "asc" ? <ChevronUp className='m-2 h-3 w-3'/> : <ChevronDown className='ml-2 h-2 w-2'/>
+                <div className='flex flex-row'>Date
+                    {sortConfig.field === "date" && (
+                        sortConfig.direction === "desc" ? <ChevronDown className='ml-2 mt-1 h-3 w-3'/> : <ChevronUp className='ml-2 mt-1 h-3 w-3'/>
                     )}
                 </div>
             </TableHead>
@@ -84,13 +117,21 @@ const TransactionsTable = ({ transactions }: { transactions: Transaction[]} ) =>
                 className='cursor-pointer font-bold'
                 onClick={() => handleSort("category")}
             >
-                <div>Category</div>
+                <div className='flex flex-row'>Category
+                    {sortConfig.field === "category" && (
+                        sortConfig.direction === "desc" ? <ChevronDown className='ml-2 mt-1 h-3 w-3'/> : <ChevronUp className='ml-2 mt-1 h-3 w-3'/>
+                    )}
+                </div>
             </TableHead>
             <TableHead
                 className='cursor-pointer text-right font-bold w-[170px] pr-4'
                 onClick={() => handleSort("amount")}
             >
-                <div>Amount</div>
+                <div className='flex flex-row'>Amount
+                    {sortConfig.field === "amount" && (
+                        sortConfig.direction === "desc" ? <ChevronDown className='ml-2 mt-1 h-3 w-3'/> : <ChevronUp className='ml-2 mt-1 h-3 w-3'/>
+                    )}
+                </div>
             </TableHead>
             <TableHead className='font-bold'>Recurring</TableHead>
             <TableHead></TableHead>
@@ -108,7 +149,12 @@ const TransactionsTable = ({ transactions }: { transactions: Transaction[]} ) =>
             ) : (
               formattedTransactionsData.map((transaction) => (
                 <TableRow key={transaction.id}>
-                    <TableCell> <Checkbox/> </TableCell>
+                    <TableCell>
+                        <Checkbox
+                            onCheckedChange={() => handleSelect(transaction.id)}
+                            checked={selectedIds.includes(transaction.id)}
+                            />
+                        </TableCell>
                     <TableCell className="font-medium">
                         {format(transaction.date, "PPP")}
                     </TableCell>
