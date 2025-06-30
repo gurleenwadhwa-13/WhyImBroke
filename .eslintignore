@@ -1,0 +1,5 @@
+# Prisma generated files
+./lib/generated/prisma/
+**/generated/prisma/
+**/*.generated.js
+./prisma/lib/generated/**
