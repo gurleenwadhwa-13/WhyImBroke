@@ -24,7 +24,7 @@ export const checkUser = async () => {
         const name = `${user.firstName} ${user.lastName}`
 
 
-        const newUser = await db.user.create({
+        await db.user.create({
             data: {
                 clerkUserId: user.id,
                 name,

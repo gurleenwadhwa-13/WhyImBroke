@@ -8,7 +8,8 @@ export function serializePrisma<T>(data: T): T {
   }
 
   if (typeof data === "object") {
-    const serialized: any = {};
+    // Use Record to allow dynamic keys with transformed values
+    const serialized: Record<string, unknown> = {};
     for (const [key, value] of Object.entries(data)) {
       if (Decimal.isDecimal(value)) {
         serialized[key] = value.toNumber();
@@ -20,7 +21,7 @@ export function serializePrisma<T>(data: T): T {
         serialized[key] = value;
       }
     }
-    return serialized;
+    return serialized as T;
   }
 
   return data;
