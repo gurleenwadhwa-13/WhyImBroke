@@ -1,38 +1,48 @@
 "use server"
 
 import { currentUser } from "@clerk/nextjs/server"
-import { db } from "./prisma";
+import { db } from "./prisma"
 
 export const checkUser = async () => {
-    const user = await currentUser();
+  let user
 
-    if(!user){
-        return null;
-    }
+  try {
+    user = await currentUser()
+  } catch (err) {
+    console.warn("Clerk currentUser() failed — likely no middleware match", err)
+    return null
+  }
 
-    try {
-        const loggedInUser = await db.user.findUnique({
-            where: {
-                clerkUserId: user.id,
-            },
-        });
+  if (!user) return null
 
-        if (loggedInUser){
-            return loggedInUser
-        }
+  try {
+    const loggedInUser = await db.user.findUnique({
+      where: {
+        clerkUserId: user.id,
+      },
+    })
 
-        const name = `${user.firstName} ${user.lastName}`
+    if (loggedInUser) return loggedInUser
 
+    const name = `${user.firstName || ""} ${user.lastName || ""}`.trim()
 
-        await db.user.create({
-            data: {
-                clerkUserId: user.id,
-                name,
-                imageURL: user.imageUrl,
-                email: user.emailAddresses[0].emailAddress
-            }
-        });
-    } catch (error) {
-        console.log(error);
-    }
+    await db.user.create({
+      data: {
+        clerkUserId: user.id,
+        name,
+        imageURL: user.imageUrl,
+        email: user.emailAddresses[0].emailAddress,
+      },
+    })
+
+    // Optionally return the newly created user if needed:
+    return await db.user.findUnique({
+      where: {
+        clerkUserId: user.id,
+      },
+    })
+  } catch (error) {
+    console.error("DB Error in checkUser():", error)
+    return null
+  }
 }
