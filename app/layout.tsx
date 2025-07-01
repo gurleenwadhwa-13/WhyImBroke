@@ -11,6 +11,7 @@ import {
   UserButton,
 } from '@clerk/nextjs'
 import { Toaster } from "@/components/ui/sonner";
+import { Analytics } from "@vercel/analytics/next"
 
 export const metadata: Metadata = {
   title: "Broke Grad",
@@ -55,6 +56,7 @@ export default function RootLayout({
             </div>
           </footer>
           {/* Footer Ends */}
+          <Analytics/>
         </body>
       </html>
     </ClerkProvider>
