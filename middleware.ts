@@ -1,6 +1,5 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
-// Define which routes require authentication
 const isProtectedRoute = createRouteMatcher([
   "/dashboard(.*)",
   "/transactions(.*)",
@@ -8,6 +7,17 @@ const isProtectedRoute = createRouteMatcher([
 ]);
 
 export default clerkMiddleware(async (auth, req) => {
+  // Skip middleware for static assets
+  if (
+    req.nextUrl.pathname.startsWith('/images') ||
+    req.nextUrl.pathname.startsWith('/fonts') ||
+    req.nextUrl.pathname.startsWith('/_next') ||
+    req.nextUrl.pathname === '/favicon.ico' ||
+    /\.(svg|png|jpg|jpeg|gif|webp|css|js|ico|json|map|txt)$/.test(req.nextUrl.pathname)
+  ) {
+    return;
+  }
+
   const { userId } = await auth();
 
   if (!userId && isProtectedRoute(req)) {
@@ -17,5 +27,8 @@ export default clerkMiddleware(async (auth, req) => {
 });
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/transactions/:path*", "/account/:path*"],
+  matcher: [
+    // Match all routes except static assets
+    '/((?!_next/.*|favicon.ico|images/.*|fonts/.*|api/.*|.*\\.(?:svg|png|jpg|jpeg|gif|webp|css|js|ico|json|map|txt)).*)',
+  ],
 };
