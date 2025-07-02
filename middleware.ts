@@ -18,10 +18,7 @@ export default clerkMiddleware(async (auth, req) => {
 
 export const config = {
   matcher: [
-    // Apply middleware to everything except:
-    // - _next (Next.js internals)
-    // - public/static assets like images or favicon
-    // - any file extension (e.g., .png, .jpg, .css)
-    '/((?!_next/static|_next/image|favicon.ico|images|fonts|.*\\.(?:svg|png|jpg|jpeg|gif|webp|css|js|ico|json|map)$).*)',
+    // Only match actual application routes, exclude all static assets
+    '/((?!_next|favicon.ico|images|fonts|api|.*\\.(svg|png|jpg|jpeg|gif|webp|css|js|ico|json|map|txt)$).*)',
   ],
 };
