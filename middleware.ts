@@ -17,8 +17,5 @@ export default clerkMiddleware(async (auth, req) => {
 });
 
 export const config = {
-  matcher: [
-    // Only match actual application routes, exclude all static assets
-    '/((?!_next|favicon.ico|images|fonts|api|.*\\.(svg|png|jpg|jpeg|gif|webp|css|js|ico|json|map|txt)$).*)',
-  ],
+  matcher: ["/dashboard/:path*", "/transactions/:path*", "/account/:path*"],
 };
