@@ -54,7 +54,7 @@ const HeroSection = () => {
                         width={1280}
                         height={780}
                         alt="Dashboard Preview"
-                        src={"/images/hero-section-image.webp"}
+                        src={"/images/hero-section-image.png"}
                         priority={true}
 
                     />

@@ -29,6 +29,6 @@ export default clerkMiddleware(async (auth, req) => {
 export const config = {
   matcher: [
     // Match all routes except static assets
-    '/((?!_next/.*|favicon.ico|images/.*|fonts/.*|api/.*|.*\\.(?:svg|png|jpg|jpeg|gif|webp|css|js|ico|json|map|txt)).*)',
+    '/((?!_next/.*|favicon.ico|fonts/.*|api/.*|.*\\.(?:svg|png|jpg|jpeg|gif|webp|css|js|ico|json|map|txt)).*)',
   ],
 };
