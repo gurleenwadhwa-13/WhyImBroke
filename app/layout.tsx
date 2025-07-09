@@ -1,14 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/header";
 import {
   ClerkProvider,
-  SignInButton,
-  SignUpButton,
   SignedIn,
   SignedOut,
-  UserButton,
 } from '@clerk/nextjs'
 import { Toaster } from "@/components/ui/sonner";
 import { Analytics } from "@vercel/analytics/next";
@@ -18,8 +14,8 @@ import AuthNav from "@/components/Navbar/AuthNav";
 import PublicNav from "@/components/Navbar/PublicNav";
 
 export const metadata: Metadata = {
-  title: "Broke Grad",
-  description: "AI Expense Manager for Students",
+  title: "WhyImBroke.tech - Take Control of Your Finances",
+  description: "Smart financial decisions made simple. Track expenses, budget better, and achieve your financial goals with WhyImBroke.tech",
 };
 
 const inter = Inter({subsets: ["latin"]})
@@ -32,7 +28,7 @@ export default function RootLayout({
   return (
     <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY} >
       <html lang="en" className="overflow-y-scroll">
-        <body className={`${inter.className}`}>
+        <body className={`${inter.className} overflow-y-scroll`}>
           {/** Header Starts */}
           <header className="fixed inset-x-0 top-0 z-50 h-26 bg-white/80 backdrop-blur-md border-b">
             <div className="mx-auto max-w-screen-xl h-full flex items-center justify-between px-4">
