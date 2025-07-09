@@ -1,7 +1,7 @@
 import { getAccountWithTransactions } from "@/actions/account/fetch-account";
 import { notFound } from "next/navigation";
-import AccountBarChart from "@/components/Account-components/accountBarChart";
-import TransactionsTable from "../../../../components/transaction-components/transactions-table";
+import AccountBarChart from "@/components/Account/accountBarChart";
+import TransactionsTable from "../../../../components/Transaction-table-components/transactions-table";
 
 type Props = {
   params: Promise<{
