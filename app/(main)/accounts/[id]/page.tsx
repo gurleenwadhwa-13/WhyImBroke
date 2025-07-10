@@ -1,7 +1,7 @@
 import { getAccountWithTransactions } from "@/actions/account/fetch-account";
 import { notFound } from "next/navigation";
 import AccountBarChart from "@/components/Account/accountBarChart";
-import TransactionsTable from "../../../../components/Transaction-table-components/transactions-table";
+import TransactionsTable from "@/components/Transaction-table-components/transactions-table";
 
 type Props = {
   params: Promise<{
@@ -20,7 +20,7 @@ export default async function AccountsPage ({params}: Props){
     <>
     <div className="flex px-6 items-end justify-between">
       <div>
-        <h1 className="text-5xl md:text-4xl gradient-title font-medium">{accountsInfo.name}</h1>
+        <h1 className="text-5xl md:text-4xl scroll-m-20 border-b pb-2 font-semibold tracking-tight first:mt-0">{accountsInfo.name}</h1>
         <p className="text-2xl justify-around text-gray-500"> {accountsInfo.type.charAt(0) + accountsInfo.type.slice(1).toLowerCase()} Account </p>
       </div>
 
