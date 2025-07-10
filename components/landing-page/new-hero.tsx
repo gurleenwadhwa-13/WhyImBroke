@@ -1,33 +1,33 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, type Variants } from "framer-motion"
 import WaitlistForm from "@/components/Landing-page/waitlist-form"
 import { Sparkles } from "lucide-react"
 
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.3,
+    },
+  },
+}
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+    },
+  },
+}
+
 const HeroSection = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut",
-      },
-    },
-  }
-
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-4 pt-20 relative overflow-hidden">
       {/* Floating background elements */}
@@ -73,7 +73,6 @@ const HeroSection = () => {
         {/* Main Headline */}
         <motion.h1
           variants={itemVariants}
-        //   className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight"
           className="scroll-m-20 text-center text-4xl md:text-5xl lg:text-6xl text-white font-extrabold tracking-tight leading-tight text-balance"
         >
           Stop wondering <span className="gradient-title">why you're broke</span>
