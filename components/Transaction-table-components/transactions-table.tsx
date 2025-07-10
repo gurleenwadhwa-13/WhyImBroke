@@ -240,7 +240,7 @@ const TransactionsTable = ({ transactions }: { transactions: Transaction[]} ) =>
                                 {transaction.category}
                             </span>
                         </TableCell>
-                        <TableCell className="text-right pr-5" style={{color: transaction.type === "EXPENSE" ? "red" : "blue"}}>
+                        <TableCell className="text-right pr-5" style={{color: transaction.type === "EXPENSE" ? "red" : "green"}}>
                             {transaction.type === "EXPENSE" ? "-" : "+"}
                             ${transaction.amount.toFixed(2)}
                         </TableCell>
