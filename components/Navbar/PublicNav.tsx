@@ -1,5 +1,3 @@
-// components/PublicNav.tsx
-
 "use client";
 
 import { SignInButton, SignUpButton } from "@clerk/nextjs";

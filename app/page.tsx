@@ -1,15 +1,21 @@
 export const dynamic = "force-dynamic";
 
-import HeroSection from "@/components/Landing-page/hero";
-import StatsData from "@/components/Landing-page/stats";
-import FeatureInfo from "@/components/Landing-page/feature-info";
+import HeroSection from "@/components/Landing-page/new-hero";
+import WaitlistStats from "@/components/Landing-page/waitlist-stats";
+import Features from "@/components/Landing-page/features";
+import DashboardPreview from "@/components/Landing-page/dashboard-preview";
+import WaitlistSection from "@/components/Landing-page/waitlist-section";
+import Footer from "@/components/Footer/footer";
 
 export default function Home() {
   return (
-    <div className="mx-auto p-10 mt-40">
+    <div className="dark-grid-bg">
       <HeroSection />
-      <StatsData />
-      <FeatureInfo />
+      <WaitlistStats />
+      <Features />
+      <DashboardPreview />
+      <WaitlistSection />
+      <Footer />
     </div>
-  );
+  )
 }
