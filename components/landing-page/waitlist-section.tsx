@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import WaitlistForm from "@/components/Landing-page/waitlist-form"
+import WaitlistForm from "@/components/landing-page/waitlist-form"
 
 import { Sparkles, Clock, Bell, Gift } from "lucide-react"
 
