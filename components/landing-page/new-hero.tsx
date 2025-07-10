@@ -1,7 +1,7 @@
 "use client"
 
 import { motion, type Variants } from "framer-motion"
-import WaitlistForm from "@/components/Landing-page/waitlist-form"
+import WaitlistForm from "@/components/landing-page/waitlist-form"
 import { Sparkles } from "lucide-react"
 
 const containerVariants: Variants = {
