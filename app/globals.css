@@ -124,30 +124,6 @@
   }
 }
 
-@utility gradient {
-  @apply bg-gradient-to-br from-blue-600 to-purple-600;
-}
-
-@utility gradient-title {
-  @apply gradient font-extrabold pr-2 pb-2 tracking-tighter text-transparent bg-clip-text;
-}
-
-/* @utility hero-image {
-  transform: rotate-x-15 scale-1;
-  transition: transform 0.5s ease-out;
-  will-change: transform;
-}
-
-@utility hero-image.scrolled {
-  transform: rotate-x-0 scale-1 -translate-y-40
-} */
-
-/* @utility hero-image {
-  transform: rotateX(15deg) scale(1);
-  transition: transform 0.5s ease-out;
-  will-change: transform;
-} */
-
 /* For state-based utilities, you might need to use @layer utilities */
 @layer utilities {
   .hero-image-wrapper {
@@ -162,5 +138,96 @@
 
   .hero-image.scrolled {
     transform: rotateX(0deg) scale(1) translateY(40);
+  }
+}
+
+@layer utilities {
+  .dark-grid-bg {
+    background-color: #0a0a0a;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    min-height: 100vh;
+  }
+
+  /* Green accent gradient text */
+  .gradient-title {
+    color: #22c55e;
+  }
+
+  /* Enhanced button styles */
+  .btn-primary {
+    background: #22c55e;
+    border: none;
+    color: white;
+    transition: all 0.3s ease;
+  }
+
+  .btn-primary:hover {
+    background: #16a34a;
+    transform: translateY(-1px);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    transition: all 0.3s ease;
+  }
+
+  .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  /* Card styles */
+  .feature-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+  }
+
+  .feature-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+  }
+
+  /* Pricing card styles */
+  .pricing-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+  }
+
+  .pricing-card.popular {
+    border-color: #22c55e;
+    background: rgba(34, 197, 94, 0.05);
+  }
+
+  /* Dashboard card styles */
+  .dashboard-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+  }
+
+  /* Navigation blur effect */
+  .nav-blur {
+    backdrop-filter: blur(20px);
+    background: rgba(10, 10, 10, 0.9);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Green accent for positive values */
+  .text-green {
+    color: #22c55e;
+  }
+
+  /* Red for negative values */
+  .text-red {
+    color: #ef4444;
   }
 }
