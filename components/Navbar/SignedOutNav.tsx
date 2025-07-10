@@ -14,7 +14,7 @@ const navItems = [
 ]
 
 // ✅ Feature flag: toggle auth buttons for staging/dev only
-const SHOW_AUTH_BUTTONS = true;
+const SHOW_AUTH_BUTTONS = false;
 
 export default function SignedOutNav() {
   return (
