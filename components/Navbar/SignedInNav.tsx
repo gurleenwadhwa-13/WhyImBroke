@@ -20,9 +20,9 @@ export default function SignedInNav() {
 
           {/* Authenticated Actions */}
           <div className="flex items-center space-x-4">
-            <Button variant="ghost" size="sm" className="text-gray-300 hover:text-white">
+            {/* <Button variant="ghost" size="sm" className="text-gray-300 hover:text-white">
               <Moon className="w-4 h-4" />
-            </Button>
+            </Button> */}
             <Link href="/dashboard">
               <Button variant="outline" className="flex items-center gap-2 px-3">
                 <LayoutDashboardIcon className="w-4 h-4" />
