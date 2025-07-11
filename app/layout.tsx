@@ -108,8 +108,8 @@ export const metadata: Metadata = {
   description:
     "Stop wondering why you're broke. Start making smart money moves with our comprehensive financial management tools. Track expenses, create budgets, and achieve your financial goals.",
   keywords: "finance, budgeting, AI, financial management, expense tracking, personal finance, money management",
-  authors: [{ name: "WhyImBroke Team" }],
-  creator: "WhyImBroke",
+  authors: [{ name: "Gurleen Wadhwa" }],
+  creator: "Gurleen Wadhwa",
   publisher: "WhyImBroke",
   robots: {
     index: true,
