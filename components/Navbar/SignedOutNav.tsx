@@ -3,7 +3,7 @@
 import { SignInButton, SignUpButton } from "@clerk/nextjs"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Github, Star, Moon } from "lucide-react"
+import { Github, Star } from "lucide-react"
 import { motion } from "framer-motion"
 
 const navItems = [
@@ -56,11 +56,8 @@ export default function SignedOutNav() {
             {SHOW_AUTH_BUTTONS && (
               <>
                 <SignInButton forceRedirectUrl="/dashboard">
-                  <Button variant="outline">Login</Button>
+                  <Button className="btn-primary">Get Started</Button>
                 </SignInButton>
-                <SignUpButton>
-                  <Button>Sign Up</Button>
-                </SignUpButton>
               </>
             )}
           </div>
