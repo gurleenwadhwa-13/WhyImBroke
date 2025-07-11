@@ -45,9 +45,9 @@ export default function SignedOutNav() {
 
           {/* Right Side Actions */}
           <div className="flex items-center space-x-4">
-            <Button variant="ghost" size="sm" className="text-gray-300 hover:text-white">
+            {/* <Button variant="ghost" size="sm" className="text-gray-300 hover:text-white">
               <Moon className="w-4 h-4" />
-            </Button>
+            </Button> */}
             <Button variant="ghost" size="sm" className="text-gray-300 hover:text-white">
               <Github className="w-4 h-4 mr-2" />
               <Star className="w-4 h-4 mr-1" />
