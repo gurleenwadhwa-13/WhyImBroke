@@ -104,7 +104,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "WhyImBroke - AI-Powered Financial Management Platform",
+  title: "WhyImBroke",
   description:
     "Stop wondering why you're broke. Start making smart money moves with our comprehensive financial management tools. Track expenses, create budgets, and achieve your financial goals.",
   keywords: "finance, budgeting, AI, financial management, expense tracking, personal finance, money management",
@@ -171,7 +171,7 @@ export default function RootLayout({
           <meta name="theme-color" content="#0a0a0a" />
           <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         </head>
-        <body className={`${inter.className} antialiased`}>
+        <body className={`${inter.className} antialiased overflow-y-scroll`}>
           <header>
             <Navigation />
           </header>
