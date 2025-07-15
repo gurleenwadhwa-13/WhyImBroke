@@ -3,8 +3,9 @@
 import { SignInButton, SignUpButton } from "@clerk/nextjs"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Github, Star, Moon } from "lucide-react"
+import { Github, Star } from "lucide-react"
 import { motion } from "framer-motion"
+import { featureFlags } from "@/lib/featureFlags"
 
 const navItems = [
   { href: "#features", label: "Features" },
@@ -53,14 +54,11 @@ export default function SignedOutNav() {
               <Star className="w-4 h-4 mr-1" />
               Star on GitHub
             </Button>
-            {SHOW_AUTH_BUTTONS && (
+            {featureFlags.SHOW_AUTH_BUTTONS && (
               <>
                 <SignInButton forceRedirectUrl="/dashboard">
-                  <Button variant="outline">Login</Button>
+                  <Button className="btn-primary">Get Started</Button>
                 </SignInButton>
-                <SignUpButton>
-                  <Button>Sign Up</Button>
-                </SignUpButton>
               </>
             )}
           </div>

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { Transaction } from '@/lib/generated/prisma'
 import { format } from 'date-fns'
 
@@ -20,33 +20,110 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+
 import { Checkbox } from '@/components/ui/checkbox'
 import { categoryColors, defaultCategories } from '@/data/categories'
 import { renderRecurringBadge } from './render-recurring-badge'
-import { ChevronDown, ChevronUp, EllipsisVertical, Search, SearchCodeIcon } from 'lucide-react'
+import { ChevronDown, ChevronUp, EllipsisVertical, Search, SearchCodeIcon, Trash, X } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-// import useFetch from '@/hooks/useFetch'
-// import { deleteTransactions } from '@/actions/transactions/delete-transactions'
+import useFetch from '@/hooks/useFetch'
+import deleteTransactions from '@/actions/transactions/delete-transactions'
 import { toast } from "sonner"
 import { Input } from '../ui/input'
 import { Select, SelectTrigger, SelectContent, SelectValue, SelectItem } from '../ui/select'
 import { Button } from '../ui/button'
+import { BarLoader } from 'react-spinners'
 
 const TransactionsTable = ({ transactions }: { transactions: Transaction[]} ) => {
   const router = useRouter();
 
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const [searchVar, setSearchVar] = useState<string>("");
+  const [typeFilter, setTypeFilter] = useState<string>("");
+  const [recurringFilter, setRecurringFilter] = useState<string>("");
+  const [categoryFilter, setCategoryFilter] = useState<string>("");
   const [sortConfig, setSortConfig] = useState({
     field: "date",
     direction: "desc"
   });
 
-  const [searchVar, setSearchVar] = useState<string>("");
-  const [typeFilter, setTypeFilter] = useState<string>("");
-  const [recurringFilter, setRecurringFilter] = useState<string>("");
-  const [categoryFilter, setCategoryFilter] = useState<string>("");
+  const {
+    data: deletedData,
+    loading: deleteTransactionLoadingState,
+    error: deleteTransactionsError,
+    func: deleteTransactionFn
+  } = useFetch(deleteTransactions)
 
-  const formattedTransactionsData = transactions;
+  const formattedTransactionsData = useMemo(() => {
+    let result = [...transactions];
+
+    //Applying the search filter
+    if(searchVar){
+        //convert the search term into lower case.
+        const searchWordLower = searchVar.toLowerCase();
+
+        //Check it against the description of the transactions
+        result = result.filter((transaction) =>
+            transaction.description?.toLowerCase().includes(searchWordLower)
+        );
+    }
+
+    //Applying the recurring type filter
+    if(recurringFilter){
+        result = result.filter((transaction) => {
+            if(recurringFilter === "recurring") return transaction.isRecurring;
+            return !transaction.isRecurring;
+        });
+    }
+
+    //Applying the transaction type filter
+    if(typeFilter){
+        result = result.filter((transaction) => {
+            if(typeFilter === "INCOME") return transaction.type === "INCOME";
+            return transaction.type === "EXPENSE";
+        })
+    }
+
+    result.sort((a: any,b: any) => {
+        let comparison: any = 0;
+
+        switch(sortConfig.field) {
+            case "date":
+                comparison = new Date(a.date).getTime() - new Date(b.date).getTime();
+                break;
+            case "category":
+                comparison = (a.category ?? "").localeCompare(b.category ?? "");
+                break;
+            case "amount":
+                comparison = a.amount - b.amount;
+                break;
+            default:
+                comparison = 0;
+        }
+
+        return sortConfig.direction === "desc" ? -comparison : comparison;
+    });
+
+    return result;
+  }, [
+    searchVar,
+    typeFilter,
+    recurringFilter,
+    transactions,
+    sortConfig
+  ]);
 
   const handleSort = (field: string) => {
     setSortConfig( (current) => ({
@@ -63,12 +140,6 @@ const TransactionsTable = ({ transactions }: { transactions: Transaction[]} ) =>
     ))
   }
 
-//   const selectedItemsInfo = (selectedIds: string[]) => {
-//     toast.info(`selected ${selectedIds.length} transactions`, {
-//         position: "top-center",
-//     })
-//   }
-
   const handleSelectAll = () => {
     //Either select all Ids when clicked or Deselect all of them
     if(selectedIds.length === transactions.length){
@@ -80,20 +151,29 @@ const TransactionsTable = ({ transactions }: { transactions: Transaction[]} ) =>
     }
   }
 
-  const handleDeleteTransactions = (transactions: string[]) => {
-    console.log("Deleting all Transactions");
-
+  const handleDeleteTransactions = () => {
+    deleteTransactionFn(selectedIds);
   }
 
   useEffect(() => {
-    if (selectedIds.length === 0) return;
-    toast.info(`Selected ${selectedIds.length} transactions`, {
-        position: "top-center",
-    })
-  }, [selectedIds])
+    if(!deleteTransactionLoadingState && deletedData){
+        toast.success("Transactions deleted successfully", {position: 'top-center'})
+    }
+  }, [deletedData, deleteTransactionLoadingState])
+
+  const handleClearAllFilters = () => {
+    setRecurringFilter("");
+    setTypeFilter("");
+    setSearchVar("");
+    setSelectedIds([]);
+  }
 
   return (
     <div className='space-y-4'>
+
+        {deleteTransactionLoadingState && (
+            <BarLoader className='pt-4' width="100%"/>
+        )}
 
         {/* Filters */}
         <div className='flex flex-col sm:flex-row'>
@@ -126,7 +206,7 @@ const TransactionsTable = ({ transactions }: { transactions: Transaction[]} ) =>
                     value={typeFilter}
                     onValueChange={setTypeFilter}
                 >
-                    <SelectTrigger className="w-[170px] hover:bg-gray-100">
+                    <SelectTrigger className="w-[170px] hover:bg-gray-100 checked:bg-cyan-300">
                         <SelectValue placeholder="Transaction Type" />
                     </SelectTrigger>
                     <SelectContent>
@@ -139,7 +219,7 @@ const TransactionsTable = ({ transactions }: { transactions: Transaction[]} ) =>
                     value={recurringFilter}
                     onValueChange={setRecurringFilter}
                  >
-                    <SelectTrigger className="w-[140px] hover:bg-gray-100">
+                    <SelectTrigger className="w-[175px] hover:bg-gray-100">
                         <SelectValue placeholder="All Types" />
                     </SelectTrigger>
                     <SelectContent>
@@ -149,21 +229,53 @@ const TransactionsTable = ({ transactions }: { transactions: Transaction[]} ) =>
                 </Select>
 
                 {selectedIds.length > 0 && (
+                    <div className="flex items-center gap-2">
+                        <AlertDialog>
+                            <AlertDialogTrigger asChild>
+                                <Button
+                                    variant="destructive"
+                                    size="sm"
+                                >
+                                    <Trash className="h-4 w-4 mr-2" />
+                                    Delete {selectedIds.length} transaction(s)
+                                </Button>
+                            </AlertDialogTrigger>
+                            <AlertDialogContent>
+                                <AlertDialogHeader>
+                                    <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                                    <AlertDialogDescription>
+                                        This action cannot be undone. This will permanently delete the selected transactions and remove your data from our servers.
+                                    </AlertDialogDescription>
+                                </AlertDialogHeader>
+                                <AlertDialogFooter>
+                                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                    <AlertDialogAction onClick={handleDeleteTransactions}>
+                                        Continue
+                                    </AlertDialogAction>
+                                </AlertDialogFooter>
+                            </AlertDialogContent>
+                        </AlertDialog>
+                    </div>
+                )}
+
+                {(recurringFilter || typeFilter || searchVar) && (
                     <div>
-                    <Button
-                        variant="destructive"
-                        onClick={() => handleDeleteTransactions(selectedIds)}
-                    >
-                    Delete {selectedIds.length} transaction(s)
-                    </Button>
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        onClick={handleClearAllFilters}
+                        title='Clear Filters'
+                      >
+                        X
+                      </Button>
                     </div>
                 )}
             </div>
         </div>
 
         {/* Transactions Table */}
-        <div className='mx-auto container space-y-4 rounded-md border-1'>
-            <Table>
+        <div className='mx-auto container space-y-4 rounded-md border-1 overflow-x-auto'>
+            <Table className='min-w-full whitespace-nowrap'>
             {/* Table Headers */}
             <TableHeader>
                 <TableRow>
@@ -245,19 +357,26 @@ const TransactionsTable = ({ transactions }: { transactions: Transaction[]} ) =>
                             ${transaction.amount.toFixed(2)}
                         </TableCell>
                         <TableCell>{renderRecurringBadge(transaction)}</TableCell>
-                        <TableCell>
+                        <TableCell className='relative'>
                             <DropdownMenu>
-                                <DropdownMenuTrigger>
-                                <EllipsisVertical/>
+                                <DropdownMenuTrigger asChild>
+                                    <Button className="p-1 rounded-sm hover:bg-gray-50/10">
+                                        <EllipsisVertical className='h-5 w-5'/>
+                                    </Button>
                                 </DropdownMenuTrigger>
-                                <DropdownMenuContent>
-                                <DropdownMenuLabel onClick={() => {
+                                <DropdownMenuContent
+                                    align="start"
+                                    side="left"
+                                    className="w-[130px] z-50"
+                                    sideOffset={5}
+                                >
+                                <DropdownMenuLabel className='hover:bg-gray-700 cursor-pointer' onClick={() => {
                                     router.push(`/transaction/create?edit=${transaction.id}`)
                                 }}>
                                     Edit
                                 </DropdownMenuLabel>
                                 <DropdownMenuSeparator />
-                                <DropdownMenuItem variant="destructive" onClick={() => handleDeleteTransactions([transaction.id])}>Delete</DropdownMenuItem>
+                                <DropdownMenuItem variant="destructive" className='hover:bg-gray-700 cursor-pointer transition-colors' onClick={() => deleteTransactionFn([transaction.id])}>Delete</DropdownMenuItem>
                                 </DropdownMenuContent>
                             </DropdownMenu>
                         </TableCell>
