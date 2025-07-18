@@ -46,9 +46,9 @@ const Footer = () => {
               <span className="text-xl font-bold text-white">WhyImBroke.tech</span>
             </div>
             <p className="text-gray-400 mb-4">Take control, make smart decisions, achieve financial freedom.</p>
-            <div className="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center">
+            {/* <div className="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-sm">$</span>
-            </div>
+            </div> */}
           </div>
 
           {/* Footer Links */}
@@ -69,7 +69,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-white/10 mt-12 pt-8 text-center">
-          <p className="text-gray-400">© 2024 WhyImBroke.tech. Take control of your financial future.</p>
+          <p className="text-gray-400">© 2025 WhyImBroke. Take control of your financial future.</p>
         </div>
       </div>
     </footer>
