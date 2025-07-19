@@ -1,5 +1,10 @@
 "use server"
 
+import { resend } from "@/lib/resend";
+import { render } from "@react-email/render";
+import { WaitlistEmail } from "@/components/Email/waitlist-email-template";
+import { toast } from "sonner";
+
 interface WaitlistSubmission {
   email: string
   timestamp: Date
@@ -16,17 +21,16 @@ export async function submitToWaitlist(email: string) {
     // Here you would typically:
     // 1. Save to your database (Supabase, Neon, etc.)
     // 2. Add to email marketing service (Mailchimp, ConvertKit, etc.)
-    // 3. Send confirmation email
 
-    // For now, we'll just log it
-    console.log("Waitlist submission:", { email, timestamp: new Date() })
-
-    // Simulate API delay
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    const data = await resend.emails.send({
+      from: 'WhyImBroke <noreply@marketing.whyimbroke.tech>',
+      to: [email],
+      subject: "You're on the waitlist! 🔥",
+      react: WaitlistEmail({ email }),
+    });
 
     return { success: true, message: "Successfully joined waitlist!" }
   } catch (error) {
-    console.error("Waitlist submission error:", error)
     throw new Error("Failed to join waitlist. Please try again.")
   }
 }

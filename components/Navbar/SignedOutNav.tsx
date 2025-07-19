@@ -18,6 +18,10 @@ const navItems = [
 const SHOW_AUTH_BUTTONS = false;
 
 export default function SignedOutNav() {
+  
+  const handleGithubStarButtonClick = () => {
+    window.open("https://github.com/gurleenwadhwa-13/whyimbroke", "_blank", "noopener,noreferrer");
+  }
   return (
     <motion.nav
       initial={{ y: -100 }}
@@ -49,7 +53,7 @@ export default function SignedOutNav() {
             {/* <Button variant="ghost" size="sm" className="text-gray-300 hover:text-white">
               <Moon className="w-4 h-4" />
             </Button> */}
-            <Button variant="ghost" size="sm" className="text-gray-300 hover:text-white">
+            <Button variant="ghost" size="sm" className="text-gray-300 hover:text-white" onClick={handleGithubStarButtonClick}>
               <Github className="w-4 h-4 mr-2" />
               <Star className="w-4 h-4 mr-1" />
               Star on GitHub
