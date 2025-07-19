@@ -19,7 +19,7 @@ const WaitlistStats = () => {
     },
     {
       icon: <Clock className="w-6 h-6" />,
-      value: "Q2 2024",
+      value: "Q2 2025",
       label: "Expected launch",
       color: "text-purple-500",
     },
