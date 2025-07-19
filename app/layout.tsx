@@ -145,7 +145,7 @@ export const metadata: Metadata = {
     title: "WhyImBroke - AI-Powered Financial Management Platform",
     description:
       "Stop wondering why you're broke. Start making smart money moves with our comprehensive financial management tools.",
-    images: ["/og-image.jpg"],
+    images: ["/images/og-image.png"],
     creator: "@whyimbroke",
   },
   verification: {
