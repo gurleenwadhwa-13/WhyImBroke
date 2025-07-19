@@ -1,6 +1,6 @@
 "use server"
 
-import { resend } from "@/lib/resend";
+import { getResendClient } from "@/lib/resend";
 import { render } from "@react-email/render";
 import { WaitlistEmail } from "@/components/Email/waitlist-email-template";
 import { toast } from "sonner";
@@ -21,6 +21,8 @@ export async function submitToWaitlist(email: string) {
     // Here you would typically:
     // 1. Save to your database (Supabase, Neon, etc.)
     // 2. Add to email marketing service (Mailchimp, ConvertKit, etc.)
+
+    const resend = getResendClient();
 
     const data = await resend.emails.send({
       from: 'WhyImBroke <noreply@marketing.whyimbroke.tech>',
