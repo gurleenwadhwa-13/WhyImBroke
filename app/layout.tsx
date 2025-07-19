@@ -133,7 +133,7 @@ export const metadata: Metadata = {
     siteName: "WhyImBroke",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/images/og-image.png",
         width: 1200,
         height: 630,
         alt: "WhyImBroke - Financial Management Platform",

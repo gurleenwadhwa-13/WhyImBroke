@@ -11,9 +11,11 @@ export function WaitlistEmail({ email }: { email: string }) {
           <Section>
             <Row>
               <Column>
+                <Link href="https://whyimbroke.tech">
                 <div style={headerLogo}>
                   <Text style={logoText}>WhyImBroke</Text>
                 </div>
+                </Link>
               </Column>
             </Row>
           </Section>
@@ -99,7 +101,7 @@ export function WaitlistEmail({ email }: { email: string }) {
               </Column>
             </Row>
 
-            <Text style={footerCopyright}>© 2024 WhyImBroke. All rights reserved.</Text>
+            <Text style={footerCopyright}>© 2025 WhyImBroke. All rights reserved.</Text>
             <Text style={footerCopyright}>You received this email because you signed up for our waitlist.</Text>
           </Section>
         </Container>
