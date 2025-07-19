@@ -104,6 +104,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://whyimbroke.tech"),
   title: "WhyImBroke",
   description:
     "Stop wondering why you're broke. Start making smart money moves with our comprehensive financial management tools. Track expenses, create budgets, and achieve your financial goals.",
