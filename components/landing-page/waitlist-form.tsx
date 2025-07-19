@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { CheckCircle, Mail, Users } from "lucide-react"
 import { submitToWaitlist } from "@/actions/lib/waitlist"
+import { toast } from "sonner"
 
 
 interface WaitlistFormProps {
@@ -31,6 +32,9 @@ const WaitlistForm = ({ onSuccess }: WaitlistFormProps) => {
       onSuccess?.()
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong. Please try again.")
+      toast.error("Failed to join waitlist. Please try again.", {
+        position: "top-center"
+      });
     } finally {
       setIsSubmitting(false)
     }
