@@ -43,7 +43,7 @@ const Footer = () => {
               <div className="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-sm">$</span>
               </div>
-              <span className="text-xl font-bold text-white">WhyImBroke.tech</span>
+              <span className="text-xl font-bold text-white">WhyImBroke</span>
             </div>
             <p className="text-gray-400 mb-4">Take control, make smart decisions, achieve financial freedom.</p>
             {/* <div className="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center">
