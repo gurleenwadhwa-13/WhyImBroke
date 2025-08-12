@@ -1,6 +1,6 @@
 "use server"
 
-import { db } from "@/lib/prisma";
+import db from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { serializePrisma } from "@/lib/helpers/prisma-helpers";
 

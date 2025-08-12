@@ -1,7 +1,7 @@
 "use server";
 
 import { Prisma, TransactionType } from "@/lib/generated/prisma";
-import { db } from "@/lib/prisma";
+import db from "@/lib/prisma";
 import { subDays } from "date-fns";
 
 // Replace with your actual types if using Prisma schema enums

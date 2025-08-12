@@ -1,7 +1,7 @@
 "use server"
 
 import { currentUser } from "@clerk/nextjs/server"
-import { db } from "./prisma"
+import db from "@/lib/prisma";
 
 export const checkUser = async () => {
   let user
