@@ -13,7 +13,6 @@ export async function createUser() {
   }
 
   const name = `${user.firstName || ""} ${user.lastName || ""}`.trim()
-  console.log("")
 
   //We grab the user details from the Clerk Auth session.
   try {
