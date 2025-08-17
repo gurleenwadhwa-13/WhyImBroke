@@ -7,8 +7,8 @@ import { subDays } from "date-fns";
 // Replace with your actual types if using Prisma schema enums
 type TransactionStatus = "COMPLETED";
 
-const ACCOUNT_ID = "edf0d911-f1b2-4564-8ad9-0f5c6ac33436";
-const USER_ID = "9415796a-33b0-40fd-b724-3a825f8cbbb0";
+const ACCOUNT_ID = "0a098673-eaf2-4a21-92dc-d361d7914162";
+const USER_ID = "e85b2e5a-9714-47d0-8b20-c9b6c1d8ec78";
 
 type CategoryDefinition = {
   name: string;

@@ -60,7 +60,7 @@ export default function SignedOutNav() {
             </Button>
             {featureFlags.SHOW_AUTH_BUTTONS && (
               <>
-                <SignInButton forceRedirectUrl="/dashboard">
+                <SignInButton>
                   <Button className="btn-primary">Get Started</Button>
                 </SignInButton>
               </>
