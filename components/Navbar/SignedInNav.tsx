@@ -20,6 +20,7 @@ export default function SignedInNav() {
 
           {/* Authenticated Actions */}
           <div className="flex items-center space-x-4">
+            {/* Maybe Add Dark-Mode <-> Light Mode Switcher later */}
             {/* <Button variant="ghost" size="sm" className="text-gray-300 hover:text-white">
               <Moon className="w-4 h-4" />
             </Button> */}

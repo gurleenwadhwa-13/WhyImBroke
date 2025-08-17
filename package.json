@@ -1,10 +1,11 @@
 {
   "name": "brokegrad",
   "version": "0.1.0",
+  "packageManager": "bun@1.1.20",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "prisma generate && next build",
+    "build": "bunx prisma generate && next build",
     "start": "next start",
     "lint": "next lint"
   },
