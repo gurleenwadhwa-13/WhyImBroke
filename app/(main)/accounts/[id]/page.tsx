@@ -1,6 +1,6 @@
 import { getAccountWithTransactions } from "@/actions/account/fetch-account";
 import { notFound } from "next/navigation";
-import AccountBarChart from "@/components/Account/accountBarChart";
+import AccountBarChart from "@/components/Account/account-bar-chart";
 import TransactionsTable from "@/components/Transaction-table-components/transactions-table";
 
 type Props = {
@@ -30,11 +30,10 @@ export default async function AccountsPage ({params}: Props){
       </div>
     </div>
 
-      {/* Account BarChart to track all income */}
-      {/* <AccountBarChart /> */}
+    {/* Account BarChart to track all income */}
+    <AccountBarChart transactions={transactions}/>
 
-      {/* Transactions Table */}
-
+    {/* Transactions Table */}
     <div className="container space-x-4 px-6 justify-center mt-5"><TransactionsTable transactions={transactions}/></div>
     </>
   )
