@@ -28,7 +28,7 @@ model Account {
   id           String        @id @default(uuid())
   name         String
   type         AccountType
-  balance      Decimal       @default(0)
+  balance      Decimal       @db.Decimal(12,2)  @default(0)
   currency     CurrencyList
   isDefault    Boolean       @default(false)
   userId       String
@@ -44,7 +44,7 @@ model Account {
 model Transaction {
   id                String                @id @default(uuid())
   type              TransactionType
-  amount            Decimal
+  amount            Decimal               @db.Decimal(10,2)
   description       String?
   date              DateTime
   category          String
