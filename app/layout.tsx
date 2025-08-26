@@ -81,14 +81,8 @@ export default function RootLayout({
           <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         </head>
         <body className={`${inter.className} antialiased overflow-y-scroll`}>
-          <header>
-            <Navigation />
-          </header>
-
-          <main className="min-h-screen">
-            {children}
-            <Toaster richColors/>
-          </main>
+          <Navigation>{children}</Navigation>
+          <Toaster richColors/>
         </body>
       </html>
     </ClerkProvider>
