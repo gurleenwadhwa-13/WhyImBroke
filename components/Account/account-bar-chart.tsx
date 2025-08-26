@@ -111,13 +111,13 @@ export function AccountBarChart({transactions}:{ transactions: Transaction[]}) {
   }, [])
 
   return (
-    <div className="container mx-auto p-7">
+    <div className="container mx-auto pt-0 p-2">
     <Card>
       <CardHeader>
           <div className="flex items-center justify-between">
           <CardTitle>Transactions Overview</CardTitle>
           <Select defaultValue={dateRange} onValueChange={(value: DateRangeKeys) => setDateRange(value)}>
-            <SelectTrigger className="w-[120px]">
+            <SelectTrigger className="w-[145px]">
               <SelectValue placeholder="Select a date range" />
             </SelectTrigger>
               <SelectContent>{Object.entries(DATE_RANGES).map(([key, {label}]) => {
