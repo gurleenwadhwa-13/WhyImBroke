@@ -146,8 +146,7 @@ export function AccountBarChart({transactions}:{ transactions: Transaction[]}) {
               axisLine={false}
               tickFormatter={(value) => value.slice(0, 7)}
             />
-            <YAxis 
-            />
+            <YAxis/>
             <ChartTooltip
               cursor={true}
               content={<ChartTooltipContent indicator="dashed" />}
