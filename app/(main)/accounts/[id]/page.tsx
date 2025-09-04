@@ -20,7 +20,7 @@ export default async function AccountsPage ({params}: Props){
     <>
       <div className="flex px-2 justify-between">
         <div>
-          <h1 className="text-3xl md:text-2xl scroll-m-10 border-b font-semibold tracking-tight first:mt-0">{accountsInfo.name}</h1>
+          <h1 className="text-2xl md:text-2xl scroll-m-10 border-b font-semibold tracking-tight first:mt-0">{accountsInfo.name}</h1>
           <p className="text-l justify-around text-gray-500"> {accountsInfo.type.charAt(0) + accountsInfo.type.slice(1).toLowerCase()} Account </p>
         </div>
 
