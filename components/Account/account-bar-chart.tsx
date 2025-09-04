@@ -106,16 +106,18 @@ export function AccountBarChart({transactions}:{ transactions: Transaction[]}) {
     );
   }, [filteredTransactions]);
 
-  const handleDateRange = useMemo(() => {
-    let transactionsInRange = [...filteredTransactions];
-  }, [])
+  // const handleDateRange = useMemo(() => {
+  //   let transactionsInRange = [...filteredTransactions];
+  // }, [])
+
+  <div class="absolute bottom-20 right-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" style="transform: translateX(-75.5136px) translateY(56.6352px);"></div>
 
   return (
     <div className="container mx-auto pt-0 p-2">
     <Card>
       <CardHeader>
           <div className="flex items-center justify-between">
-          <CardTitle>Transactions Overview</CardTitle>
+          <CardTitle>Account Overview</CardTitle>
           <Select defaultValue={dateRange} onValueChange={(value: DateRangeKeys) => setDateRange(value)}>
             <SelectTrigger className="w-[145px]">
               <SelectValue placeholder="Select a date range" />
@@ -136,7 +138,7 @@ export function AccountBarChart({transactions}:{ transactions: Transaction[]}) {
       <SectionCards totalIncome={totalAccountChanges.income} totalExpense={totalAccountChanges.expense} />
 
       <CardContent>
-        <ChartContainer config={chartConfig} className="min-h-[100px] w-full">
+        <ChartContainer config={chartConfig} className="h-[250px] md:h-[300px] lg:h-[350px] w-full">
           <BarChart accessibilityLayer data={filteredTransactions}>
             <CartesianGrid vertical={false} />
             <XAxis
