@@ -7,7 +7,7 @@ import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { CheckCircle, Mail, Users } from "lucide-react"
-import { submitToWaitlist } from "@/actions/lib/waitlist"
+import { submitToWaitlist } from "@/actions/emails/waitlist"
 import { toast } from "sonner"
 
 
