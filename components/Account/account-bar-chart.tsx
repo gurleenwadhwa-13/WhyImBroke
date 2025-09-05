@@ -110,8 +110,6 @@ export function AccountBarChart({transactions}:{ transactions: Transaction[]}) {
   //   let transactionsInRange = [...filteredTransactions];
   // }, [])
 
-  <div class="absolute bottom-20 right-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" style="transform: translateX(-75.5136px) translateY(56.6352px);"></div>
-
   return (
     <div className="container mx-auto pt-0 p-2">
     <Card>
