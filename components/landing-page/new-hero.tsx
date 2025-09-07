@@ -39,7 +39,7 @@ const HeroSection = () => {
         }}
         transition={{
           duration: 20,
-          repeat: Number.POSITIVE_INFINITY,
+          repeat: 2,
           ease: "linear",
         }}
       />
@@ -51,7 +51,7 @@ const HeroSection = () => {
         }}
         transition={{
           duration: 25,
-          repeat: Number.POSITIVE_INFINITY,
+          repeat: 2,
           ease: "linear",
         }}
       />
