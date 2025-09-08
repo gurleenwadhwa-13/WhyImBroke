@@ -1,4 +1,4 @@
 // lib/featureFlags.ts
 export const featureFlags = {
-  SHOW_AUTH_BUTTONS: true,
+  SHOW_AUTH_BUTTONS: false,
 }
