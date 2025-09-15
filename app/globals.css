@@ -120,7 +120,7 @@
     @apply bg-background text-foreground;
   }
   html {
-    overflow-y: scroll;
+    overflow-y: auto;
   }
 }
 
