@@ -1,7 +1,7 @@
 # 💰 WhyImBroke
 
 <div align="center">
-  <img src="public/images/hero-section-image.webp" alt="WhyImBroke Dashboard" width="600" />
+  <img src="public/images/hero-section-img.png" alt="WhyImBroke Dashboard" width="600" />
 
   [![Next.js](https://img.shields.io/badge/Next.js-14.0-black?style=flat-square&logo=next.js)](https://nextjs.org/)
   [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
@@ -13,7 +13,7 @@
   **Your AI-Powered Financial Management Platform**
   > Take control of your finances with intelligent expense tracking, smart budgeting, and insightful analytics.
 
-  [🚀 Live Demo](https://whyimbroke.tech) · [📧 Join Waitlist](#waitlist) · [🐛 Report Bug](https://github.com/your-username/whyimbroke/issues)
+  [🚀 Live Demo](https://whyimbroke.tech) · [📧 Join Waitlist](https://whyimbroke.tech) · [🐛 Report Bug](https://github.com/gurleenwadhwa-13/whyimbroke/issues)
 </div>
 
 ---

@@ -35,7 +35,7 @@ export default async function DashboardPage() {
           </div>
           {/* Recent Transaction - Last 7 days */}
           <div className="flex-1 min-w-[300px]">
-            <RecentTransactionsSummary transactions={data?.metrics.serialized_lastweekTransactionsData || []}/>
+            <RecentTransactionsSummary transactions={data?.metrics.lastweekTransactionsData || []}/>
           </div>
       </div>
       </div>
