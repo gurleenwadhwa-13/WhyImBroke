@@ -4,12 +4,13 @@ import { getUser } from "@/actions/users/getUser"
 import CreateAccountDrawer from "@/components/Account/create-account-drawer"
 import { Card, CardContent } from "@/components/ui/card"
 import { Plus } from "lucide-react"
+import { toast } from "sonner"
 
 
 export default async function AccountsPage() {
     const { success } = await getUser()
     if (!success) {
-    return <div className="p-4">Error loading user</div>
+    return toast.error("Failed to fetch user")
     }
 
     const { data: accounts } = await FetchAccounts()
