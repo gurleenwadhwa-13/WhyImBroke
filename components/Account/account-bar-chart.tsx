@@ -67,7 +67,10 @@ export function AccountBarChart({transactions}:{ transactions: Transaction[]}) {
 
     //Filtering transactions within the date range
     const filtered = transactions.filter(
-      (t) => new Date(t.date) >= startDate && new Date(t.date) <= endOfDay(now)
+      (t) => {
+        const transactionDate = new Date(t.date); // Parse transaction date
+        return transactionDate >= startDate && transactionDate <= endOfDay(now);
+      }
     )
 
     const grouped = filtered.reduce((acc: Record<string, { date: string; income: number; expense: number }>, transaction) => {

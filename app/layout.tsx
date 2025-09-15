@@ -75,14 +75,14 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY} >
-      <html lang="en" className="dark scroll-smooth overflow-y-scroll">
+      <html lang="en" className="dark scroll-smooth overflow-y-auto">
         <head>
           <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
           <link rel="manifest" href="/manifest.json" />
           <meta name="theme-color" content="#0a0a0a" />
           <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         </head>
-        <body className={`${inter.className} antialiased overflow-y-scroll`}>
+        <body className={`${inter.className} antialiased overflow-y-auto bg-background text-foreground`}>
           <Analytics />
           <SpeedInsights />
           <Navigation>{children}</Navigation>
