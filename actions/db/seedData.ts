@@ -7,8 +7,16 @@ import { subDays } from "date-fns";
 // Replace with your actual types if using Prisma schema enums
 type TransactionStatus = "COMPLETED";
 
-const ACCOUNT_ID = "413a379c-da62-495b-b2c0-e6232070085d";
-const USER_ID = "2912a572-ea9d-47cb-9bd2-6020e19417f4";
+//hasgcorp account
+// const ACCOUNT_ID = "413a379c-da62-495b-b2c0-e6232070085d";
+// const USER_ID = "2912a572-ea9d-47cb-9bd2-6020e19417f4";
+
+//CIBC Account Seeds
+const ACCOUNT_ID = "3eff8739-55ff-45c8-90bb-bf1dbb7f5e45"
+const USER_ID = "2912a572-ea9d-47cb-9bd2-6020e19417f4"
+
+//gurleentesting-userID
+// const USER_ID = "2eb7f5f2-1eef-4554-98db-fb3b29cd1790"
 
 type CategoryDefinition = {
   name: string;
