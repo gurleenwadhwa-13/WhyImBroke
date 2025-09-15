@@ -1,12 +1,30 @@
+import { auth } from "@clerk/nextjs/server"
+import { serializePrisma } from "@/lib/helpers/prisma-helpers";
 import db from "@/lib/prisma";
+
+
 import { startOfDay, endOfDay } from 'date-fns';
 
-export async function getTransactions(userId: string, interval: "7" | "30") {
+export async function fetchTransactions(interval?: string | number) {
     try {
+        const { userId } = await auth();
+
+        // Check if the user is logged in or not?
+        if(!userId) throw new Error("UnAuthorized");
+
+        //check if the user is a valid entry in the db
+        const user = await db.user.findUnique({
+            where: {
+                clerkUserId: userId
+            }
+        })
+
+        if(!user) throw new Error("User not found");
+
         // Get all account IDs for this user
         const userAccounts = await db.account.findMany({
             where: {
-                userId: userId
+                userId: user.id
             },
             select: {
                 id: true
@@ -15,26 +33,36 @@ export async function getTransactions(userId: string, interval: "7" | "30") {
 
         const accountIds = userAccounts.map(account => account.id);
 
-        // Calculate date range
-        const endDate = new Date();
-        const startDate = new Date();
-        startDate.setDate(endDate.getDate() - Number(interval));
+        // Build the where clause conditionally
+        const whereClause: any = {
+            userId: user.id,
+            accountId: {
+                in: accountIds
+            }
+        };
 
-        const normalizedStartDate = startOfDay(startDate);
-        const normalizedEndDate = endOfDay(endDate);
+        // Add date filtering only if interval is provided and not empty
+        if (interval && interval !== "" && interval !== "0") {
+            const endDate = new Date();
+            const startDate = new Date();
+            const days = typeof interval === 'string' ? parseInt(interval) : interval;
 
-        // Fetch transactions for all user accounts within date range
-        const transactions = await db.transaction.findMany({
-            where: {
-                userId: userId,
-                accountId: {
-                    in: accountIds
-                },
-                date: {
+            if (!isNaN(days) && days > 0) {
+                startDate.setDate(endDate.getDate() - days);
+
+                const normalizedStartDate = startOfDay(startDate);
+                const normalizedEndDate = endOfDay(endDate);
+
+                whereClause.date = {
                     gte: normalizedStartDate,
                     lte: normalizedEndDate,
-                }
-            },
+                };
+            }
+        }
+
+        // Fetch transactions for all user accounts
+        const transactions = await db.transaction.findMany({
+            where: whereClause,
             orderBy: {
                 date: 'desc'
             },
@@ -43,7 +71,8 @@ export async function getTransactions(userId: string, interval: "7" | "30") {
             }
         });
 
-        return transactions;
+        const serializedTransactions = serializePrisma(transactions);
+        return {success: true, data: serializedTransactions};
 
     } catch (error) {
         console.error("Error fetching recent transactions:", error);
