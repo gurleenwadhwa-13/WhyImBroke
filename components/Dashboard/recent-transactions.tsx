@@ -8,56 +8,24 @@ import { format } from 'date-fns'
 type RecentTransactionType = any | undefined;
 
 export function RecentTransactionsSummary({ transactions }: { transactions: RecentTransactionType[] }) {
-    const recentTransactions = [
-    {
-      id: 1,
-      description: "Salary Deposit",
-      amount: 4250,
-      type: "income",
-      date: "2024-01-02",
-      category: "Salary",
-    },
-    {
-      id: 2,
-      description: "Grocery Store",
-      amount: -125.5,
-      type: "expense",
-      date: "2024-01-02",
-      category: "Food",
-    },
-    {
-      id: 3,
-      description: "Gas Station",
-      amount: -65.0,
-      type: "expense",
-      date: "2024-01-01",
-      category: "Transportation",
-    },
-    {
-      id: 4,
-      description: "Freelance Payment",
-      amount: 800,
-      type: "income",
-      date: "2024-01-01",
-      category: "Freelance",
-    },
-    {
-      id: 5,
-      description: "Netflix Subscription",
-      amount: -15.99,
-      type: "expense",
-      date: "2023-12-31",
-      category: "Entertainment",
-    },
-    {
-      id: 6,
-      description: "Coffee Shop",
-      amount: -8.5,
-      type: "expense",
-      date: "2023-12-30",
-      category: "Food",
-    },
-  ]
+    // If no transactions, show empty state
+    if (!transactions || transactions.length === 0) {
+        return (
+            <Card className="flex-auto bg-card border-2">
+                <CardHeader>
+                    <CardTitle className="flex items-center gap-2 text-foreground text-lg font-semibold">
+                        <Clock1 className="h-5 w-5"/>
+                        Recent Transactions (Last 7 days)
+                    </CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <div className="text-center text-muted-foreground py-8">
+                        No recent transactions found
+                    </div>
+                </CardContent>
+            </Card>
+        )
+    }
 
     return (
         <Card className="flex-auto bg-card border-2">
