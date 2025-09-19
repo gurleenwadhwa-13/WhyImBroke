@@ -65,31 +65,31 @@ const WaitlistForm = ({ onSuccess }: WaitlistFormProps) => {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="flex flex-col sm:flex-row gap-4">
-        <div className="flex-1 relative">
-          <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-          <Input
-            type="email"
-            placeholder="Enter your email address"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="pl-10 bg-white/5 backdrop-blur-sm border-white/20 text-white placeholder-gray-400 focus:border-green-500 focus:ring-green-500/20 h-12"
-            required
-          />
+      <div className="flex-1 min-w-[280px] sm:min-w-[350px] relative w-full">
+        <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+        <Input
+        type="email"
+        placeholder="Enter your email address"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        className="pl-10 bg-white/5 backdrop-blur-sm border-white/20 text-white placeholder-gray-400 focus:border-green-500 focus:ring-green-500/20 h-12"
+        required
+        />
+      </div>
+      <Button
+        type="submit"
+        disabled={isSubmitting || !email}
+        className="btn-primary px-8 py-3 h-12 whitespace-nowrap disabled:opacity-50"
+      >
+        {isSubmitting ? (
+        <div className="flex items-center space-x-2">
+          <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+          <span>Joining...</span>
         </div>
-        <Button
-          type="submit"
-          disabled={isSubmitting || !email}
-          className="btn-primary px-8 py-3 h-12 whitespace-nowrap disabled:opacity-50"
-        >
-          {isSubmitting ? (
-            <div className="flex items-center space-x-2">
-              <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-              <span>Joining...</span>
-            </div>
-          ) : (
-            "Join Waitlist"
-          )}
-        </Button>
+        ) : (
+        "Join Waitlist"
+        )}
+      </Button>
       </div>
       {error && (
         <motion.p initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="text-red-400 text-sm">
