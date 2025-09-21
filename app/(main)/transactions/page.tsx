@@ -1,10 +1,9 @@
+export const dynamic = 'force-dynamic'
 import { fetchTransactions } from '@/actions/transactions/fetch-transactions'
-import { Button } from '@/components/ui/button';
-import { Plus } from 'lucide-react';
+import { FetchAccounts } from "@/actions/account/fetch-account"
 import TransactionsTable from '@/components/Transaction-table-components/transactions-table';
 import { toast } from 'sonner';
 import CreateTransactionDialog from '@/components/Transactions/create-transaction-dialog';
-import { FetchAccounts } from "@/actions/account/fetch-account"
 
 export default async function TransactionPage(){
   const { success, data: transactions } = await fetchTransactions();
