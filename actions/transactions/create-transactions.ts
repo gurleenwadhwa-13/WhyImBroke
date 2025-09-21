@@ -20,8 +20,6 @@ export default async function CreateTransactions (data: CreateTransactionType) {
             }
         })
 
-        console.log(`Here is the user ${user}`);
-
         if(!user) throw new Error("User not found");
 
         //Check if the provided accountId is a valid account in our db against this same userId
@@ -31,8 +29,6 @@ export default async function CreateTransactions (data: CreateTransactionType) {
                 userId: user.id,
             }
         })
-
-        console.log(userAccount);
 
         if (!userAccount) throw new Error("Account not found or unauthorized");
 
