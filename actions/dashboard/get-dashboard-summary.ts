@@ -16,8 +16,6 @@ export default async function getDashboardSummary() {
         const {data: recentTransactionsData} = await fetchTransactions("30");
 
         const {data: lastweekTransactionsData} = await fetchTransactions("7");
-        console.log("Last weeks data");
-        console.log(lastweekTransactionsData);
 
         //Finding networth
         let networth = 0;
