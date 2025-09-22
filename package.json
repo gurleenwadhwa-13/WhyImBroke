@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "prisma migrate deploy && prisma generate && next build",
-    "postinstall": "prisma generate",
     "start": "next start",
     "lint": "next lint"
   },
@@ -40,6 +39,7 @@
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "framer-motion": "^12.23.0",
+    "gsap": "^3.13.0",
     "lucide-react": "^0.541.0",
     "motion": "^12.23.16",
     "next": "15.3.2",
