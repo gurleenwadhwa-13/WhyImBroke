@@ -38,16 +38,16 @@ const featuresData = [
 
 const Features = () => {
   return (
-    <section className="py-24" id="features">
+    <section className="py-24 font-geist bg-clip-text font-medium tracking-tighter" id="features">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-16 font-geist"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+          <h2 className="text-4xl md:text-5xl mb-6 text-white font-geist bg-clip-text font-medium tracking-tighter">
             Master your money with <span className="gradient-title">powerful tools</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">

@@ -18,7 +18,7 @@ const DashboardPreview = () => {
   ]
 
   return (
-    <section className="py-24" id="dashboard">
+    <section className="py-24 font-geist bg-clip-text font-medium tracking-tighter" id="dashboard">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

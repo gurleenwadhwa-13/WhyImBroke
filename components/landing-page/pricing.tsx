@@ -56,7 +56,7 @@ const pricingPlans = [
 
 const Pricing = () => {
   return (
-    <section className="py-24" id="pricing">
+    <section className="py-24 font-geist bg-clip-text font-medium tracking-tighter" id="pricing">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -65,7 +65,7 @@ const Pricing = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+          <h2 className="text-4xl md:text-5xl font-geist bg-clip-text font-medium tracking-tighter mb-6 text-white">
             Choose your <span className="gradient-title">financial freedom</span> plan
           </h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">

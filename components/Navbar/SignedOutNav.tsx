@@ -29,7 +29,7 @@ export default function SignedOutNav() {
       transition={{ duration: 0.6, ease: "easeOut" }}
       className="fixed top-0 left-0 right-0 z-50 nav-blur"
     >
-      <div className="container mx-auto px-4 py-4">
+      <div className="container mx-auto px-4 py-4 font-geist bg-clip-text font-medium tracking-tighter">
         <div className="flex items-center justify-between">
           {/* Logo & Nav Items */}
           <div className="flex items-center space-x-8">

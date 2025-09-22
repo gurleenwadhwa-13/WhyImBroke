@@ -22,7 +22,7 @@ const WaitlistSection = () => {
   ]
 
   return (
-    <section className="py-24 bg-gradient-to-b from-black/20 to-black/40">
+    <section className="py-24 bg-gradient-to-b from-black/20 to-black/40 font-geist bg-clip-text font-medium tracking-tighter">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -38,14 +38,14 @@ const WaitlistSection = () => {
           </div>
 
           {/* Headline */}
-          <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+          <h2 className="text-4xl md:text-6xl font-geist bg-clip-text font-medium tracking-tighter text-white mb-6 leading-tight">
             Be the first to experience
             <br />
             <span className="gradient-title">financial freedom</span>
           </h2>
 
           {/* Subtitle */}
-          <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto font-geist bg-clip-text font-medium tracking-tighter">
             Join thousands of others waiting for the launch of WhyImBroke. Get notified when we're ready to help you
             take control of your finances.
           </p>

@@ -34,7 +34,7 @@ const Footer = () => {
   ]
 
   return (
-    <footer className="py-16 border-t border-white/10">
+    <footer className="py-16 border-t border-white/10 font-geist bg-clip-text font-medium tracking-tighter">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
