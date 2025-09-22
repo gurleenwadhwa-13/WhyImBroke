@@ -1,8 +1,6 @@
 import { auth } from "@clerk/nextjs/server"
 import { serializePrisma } from "@/lib/helpers/prisma-helpers";
 import db from "@/lib/prisma";
-
-
 import { startOfDay, endOfDay } from 'date-fns';
 
 export async function fetchTransactions(interval?: string | number) {
