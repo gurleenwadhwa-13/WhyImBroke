@@ -13,7 +13,6 @@ import type { TransactionInputSchemaType } from "@/lib/zod/TransactionSchemas/tr
 import { Account } from "@/lib/generated/prisma"
 import { TransactionType, RecurringIntervalList } from "@/lib/generated/prisma"
 
-import { cn } from "@/lib/utils"
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Plus, ChevronDownIcon, Loader2 } from 'lucide-react';
@@ -56,7 +55,6 @@ interface CreateTransactionDialogProps {
 export default function CreateTransactionDialog ({accounts}: CreateTransactionDialogProps) {
     const [open, setOpen] = useState(false);
     const [openDatePicker, setOpenDatePicker] = useState(false);
-    const [date, setDate] = useState<Date | undefined>();
 
     const {
         register,
@@ -105,7 +103,7 @@ export default function CreateTransactionDialog ({accounts}: CreateTransactionDi
     const categories = transactionType === "INCOME" ? income_categories : expense_categories;
 
     return (
-        <div className="flex w-full p-6 justify-center">
+        <div className="flex flex-row-reverse p-6 justify-center">
             <Dialog open={open} onOpenChange={setOpen}>
                 <DialogTrigger asChild>
                 <Button variant="default" className="bg-primary hover:bg-primary/90">
