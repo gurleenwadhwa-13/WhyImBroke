@@ -79,6 +79,27 @@ model Budget {
   @@map("budgets")
 }
 
+model WaitlistEntry {
+  id          String   @id @default(cuid())
+  email       String   @unique
+  metadata    Json?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  //Resend integration fiels.
+  resendContactId String?
+  resendAudienceId String?
+
+  // Track email interactions
+  emailsSent  Int      @default(0)
+  lastEmailSent DateTime?
+  opened      Boolean  @default(false)
+  clicked     Boolean  @default(false)
+
+  @@map("waitlist_entries")
+}
+
+
 enum AccountType {
   SAVINGS
   CHEQUING
