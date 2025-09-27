@@ -1,5 +1,5 @@
 import { FetchAccounts } from "@/actions/account/fetch-account"
-import AccountCard from "@/app/(main)/dashboard/_components/AccountCard"
+import AccountCard from "@/components/AccountCard/AccountCard"
 import { getUser } from "@/actions/users/getUser"
 import CreateAccountDrawer from "@/components/Account/create-account-drawer"
 import { Card, CardContent } from "@/components/ui/card"

@@ -18,8 +18,8 @@ export default async function TransactionPage(){
       <main className='flex-1 flex flex-col'>
 
         <div className='border-b border-border p-3'>
-          <div className='flex items-center justify-between'>
-            <div>
+          <div className='flex flex-row items-center justify-between'>
+            <div className='w-[50%]'>
               <h1 className="text-3xl font-bold text-foreground">Transactions</h1>
               <p className="text-muted-foreground mt-1">Manage and track all your financial transactions</p>
             </div>

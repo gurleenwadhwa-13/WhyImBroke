@@ -279,7 +279,7 @@ const TransactionsTable = ({ transactions }: { transactions: Transaction[]} ) =>
             {/* Table Headers */}
             <TableHeader>
                 <TableRow>
-                <TableHead className='w-auto'>
+                <TableHead className='w-[35px]'>
                     <Checkbox
                         onCheckedChange={() => handleSelectAll()}
                         checked={selectedIds.length === transactions.length}
@@ -338,10 +338,12 @@ const TransactionsTable = ({ transactions }: { transactions: Transaction[]} ) =>
                                 checked={selectedIds.includes(transaction.id)}
                                 />
                             </TableCell>
-                        <TableCell className="font-medium">
+                        <TableCell className="w-[100px] font-medium ">
                             {format(transaction.date, "PPP")}
                         </TableCell>
-                        <TableCell>{transaction.description}</TableCell>
+                        <TableCell className='w-[300px]'>
+                            {transaction.description}
+                        </TableCell>
                         <TableCell className="capitalize">
                             <span
                                 style={{
@@ -352,7 +354,7 @@ const TransactionsTable = ({ transactions }: { transactions: Transaction[]} ) =>
                                 {transaction.category}
                             </span>
                         </TableCell>
-                        <TableCell className="text-right pr-5" style={{color: transaction.type === "EXPENSE" ? "red" : "green"}}>
+                        <TableCell className="pr-4" style={{color: transaction.type === "EXPENSE" ? "red" : "green"}}>
                             {transaction.type === "EXPENSE" ? "-" : "+"}
                             ${transaction.amount.toFixed(2)}
                         </TableCell>
