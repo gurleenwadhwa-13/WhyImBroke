@@ -61,7 +61,7 @@ export function WaitlistEmail({ email }: { email: string }) {
             <Row style={socialRow}>
               <Column style={socialColumn}>
                 <Section style={socialLinks}>
-                  <Link href="https://x.com/0xGurleen" style={iconLink}>
+                  <Link href="https://x.com/gurleenwadhwa" style={iconLink}>
                     <Img
                       src="https://cdn-icons-png.flaticon.com/512/733/733579.png" // X / Twitter logo
                       width="30"
@@ -70,7 +70,7 @@ export function WaitlistEmail({ email }: { email: string }) {
                       style={icon}
                     />
                   </Link>
-                  <Link href="https://www.linkedin.com/in/gurleen-wadhwa-56829a1a0/" style={iconLink}>
+                  <Link href="https://www.linkedin.com/in/gurleenwadhwa" style={iconLink}>
                     <Img
                       src="https://cdn-icons-png.flaticon.com/512/145/145807.png" // LinkedIn logo
                       width="30"
