@@ -2,7 +2,7 @@
 
 import { auth } from "@clerk/nextjs/server";
 import db from "@/lib/prisma";
-import { createUser } from "@/actions/users/createUser";
+import { createUser } from "@/actions/users/create-user";
 
 export async function getUser (){
   const { userId } = await auth();

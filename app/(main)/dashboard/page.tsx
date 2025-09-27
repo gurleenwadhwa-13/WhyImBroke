@@ -1,4 +1,4 @@
-import { getUser } from "@/actions/users/getUser"
+import { getUser } from "@/actions/users/fetch-user"
 import getDashboardSummary from "@/actions/dashboard/get-dashboard-summary"
 import { TileWidgets } from "@/components/Dashboard/tile-widgets"
 import { RecentTransactionsSummary } from "@/components/Dashboard/recent-transactions"
