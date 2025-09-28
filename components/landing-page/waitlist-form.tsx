@@ -20,6 +20,7 @@ const WaitlistForm = ({ onSuccess }: WaitlistFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [error, setError] = useState("")
+  const [status, setStatus] = useState<"new" | "duplicate" | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -27,9 +28,18 @@ const WaitlistForm = ({ onSuccess }: WaitlistFormProps) => {
     setError("")
 
     try {
-      await submitToWaitlist(email)
-      setIsSubmitted(true)
-      onSuccess?.()
+      const result = await submitToWaitlist(email);
+
+      if (result.status == "new"){
+        setIsSubmitted(true)
+        setStatus("new")
+        onSuccess?.()
+        toast.success("🎉 You're on the waitlist!", { position: "top-center" })
+      }else if(result.status == "duplicate"){
+        setIsSubmitted(true) // still show success UI
+        setStatus("duplicate")
+        toast.info("✅ You're already on the waitlist!", { position: "top-center" })
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong. Please try again.")
       toast.error("Failed to join waitlist. Please try again.", {
@@ -50,9 +60,12 @@ const WaitlistForm = ({ onSuccess }: WaitlistFormProps) => {
         <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.2, type: "spring" }}>
           <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
         </motion.div>
-        <h3 className="text-2xl font-bold text-white">You're on the list!</h3>
+        <h3 className="text-2xl font-bold text-white">{status === "new" ? "You're on the list!" : "You're already on the list!"}</h3>
         <p className="text-gray-400">
-          Thanks for joining our waitlist. We'll notify you as soon as WhyImBroke launches!
+          {status === "new"
+            ? "Thanks for joining our waitlist. We'll notify you as soon as WhyImBroke launches!"
+            : "Looks like you’ve already joined — we’ll keep you posted as soon as WhyImBroke launches!"
+          }
         </p>
         <div className="flex items-center justify-center space-x-2 text-sm text-gray-500">
           <Users className="w-4 h-4" />
