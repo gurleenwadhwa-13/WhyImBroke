@@ -1,6 +1,6 @@
 import { FetchAccounts } from "@/actions/account/fetch-account"
 import AccountCard from "@/components/AccountCard/AccountCard"
-import { getUser } from "@/actions/users/getUser"
+import { getUser } from "@/actions/users/fetch-user"
 import CreateAccountDrawer from "@/components/Account/create-account-drawer"
 import { Card, CardContent } from "@/components/ui/card"
 import { Plus } from "lucide-react"

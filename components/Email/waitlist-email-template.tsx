@@ -61,7 +61,7 @@ export function WaitlistEmail({ email }: { email: string }) {
             <Row style={socialRow}>
               <Column style={socialColumn}>
                 <Section style={socialLinks}>
-                  <Link href="https://x.com/0xGurleen" style={iconLink}>
+                  <Link href="https://x.com/gurleenwadhwa" style={iconLink}>
                     <Img
                       src="https://cdn-icons-png.flaticon.com/512/733/733579.png" // X / Twitter logo
                       width="30"
@@ -70,7 +70,7 @@ export function WaitlistEmail({ email }: { email: string }) {
                       style={icon}
                     />
                   </Link>
-                  <Link href="https://www.linkedin.com/in/gurleen-wadhwa-56829a1a0/" style={iconLink}>
+                  <Link href="https://www.linkedin.com/in/gurleenwadhwa" style={iconLink}>
                     <Img
                       src="https://cdn-icons-png.flaticon.com/512/145/145807.png" // LinkedIn logo
                       width="30"
@@ -186,7 +186,7 @@ const signature = {
   lineHeight: "24px",
   fontWeight: "600",
   color: "#1f2937",
-  margin: "20px 0 0 0",
+  margin: "20px 0 10px 0",
 }
 
 const hr = {
@@ -217,65 +217,11 @@ const socialRow = {
   margin: "0 0 24px 0",
 }
 
-const socialRowPreview = {
-  display: "flex",
-  justifyContent: "center",
-  gap: "16px",
-  margin: "0 0 24px 0",
-}
-
 const socialColumn = {
   display: "inline-block",
   width: "auto",
   paddingRight: "8px",
   paddingLeft: "8px",
-}
-
-const socialLink = {
-  textDecoration: "none",
-}
-
-const socialIconBlack = {
-  width: "40px",
-  height: "40px",
-  borderRadius: "20px",
-  backgroundColor: "#000000",
-  display: "inline-flex",
-  alignItems: "center",
-  justifyContent: "center",
-  textDecoration: "none",
-}
-
-const socialIconBlue = {
-  width: "40px",
-  height: "40px",
-  borderRadius: "20px",
-  backgroundColor: "#0077b5",
-  display: "inline-flex",
-  alignItems: "center",
-  justifyContent: "center",
-  textDecoration: "none",
-}
-
-const socialIconGray = {
-  width: "40px",
-  height: "40px",
-  borderRadius: "20px",
-  backgroundColor: "#6b7280",
-  display: "inline-flex",
-  alignItems: "center",
-  justifyContent: "center",
-  textDecoration: "none",
-}
-
-const socialIconText = {
-  color: "#ffffff",
-  fontSize: "18px",
-  fontWeight: "700",
-  lineHeight: "18px",
-  textDecoration: "none",
-  margin: 0,
-  display: "block",
 }
 
 const socialLinks = {
