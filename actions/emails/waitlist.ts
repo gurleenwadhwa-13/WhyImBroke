@@ -4,11 +4,6 @@ import { getResendClient, resend_audience_id } from "@/lib/resend";
 import { WaitlistEmail } from "@/components/Email/waitlist-email-template";
 import db from "@/lib/prisma";
 
-interface WaitlistSubmission {
-  email: string
-  timestamp: Date
-}
-
 export async function submitToWaitlist(email: string) {
   // Basic email validation
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -26,9 +21,17 @@ export async function submitToWaitlist(email: string) {
     })
 
     if(existingEntry){
+      await resend.emails.send({
+        from: 'WhyImBroke <welcome@marketing.whyimbroke.tech>',
+        to: [email],
+        subject: "You're already on the waitlist! 🔥",
+        react: WaitlistEmail({ email }),
+      });
+
       return {
-        success: true,
-        message: "Email already registered in waitlist",
+        success: false,
+        status: "duplicate",
+        message: "Looks like you're already on the waitlist",
       }
     }
 
@@ -76,9 +79,18 @@ export async function submitToWaitlist(email: string) {
       react: WaitlistEmail({ email }),
     });
 
-    return { success: true, message: "Successfully joined waitlist!" }
-  } catch (error) {
-    console.error("Waitlist error details:", JSON.stringify(error, null, 2));
+    return { success: true, status:"new" ,message: "Successfully joined waitlist!" }
+  } catch (error: any) {
+    // Handle race condition (P2002 unique constraint violation)
+    if (error.code === "P2002") {
+      return {
+        success: false,
+        status: "duplicate",
+        message: "You’re already on the waitlist!",
+      };
+    }
+
+    console.error("Error in submitToWaitlist:", error);
     throw new Error("Failed to join waitlist. Please try again.")
   }
 }
