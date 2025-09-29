@@ -9,4 +9,4 @@ export function getResendClient() {
   return new Resend(key);
 }
 
-export const resend_audience_id = process.env.RESEND_AUDIENCE_KEY;
+export const resend_audience_id = process.env.RESEND_AUDIENCE_ID;
