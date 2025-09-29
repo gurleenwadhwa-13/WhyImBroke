@@ -35,6 +35,11 @@ export async function submitToWaitlist(email: string) {
       }
     }
 
+    // ADD THIS LOG TO DEBUG
+    console.log("Resend Audience ID:", resend_audience_id);
+    console.log("Type:", typeof resend_audience_id);
+    console.log("Is valid UUID:", /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(resend_audience_id as string));
+
     //Running a transaction for creating DB entry + Resend operations to make sure everything succeeds.
     const result = await db.$transaction(async(tx) => {
 
