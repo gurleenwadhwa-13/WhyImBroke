@@ -3,7 +3,7 @@ import React from 'react'
 
 const Page = () => {
   return (
-    <div className='container mx-auto px-40'>
+    <div className='flex mx-auto justify-between'>
       <SignIn />
     </div>
   )
