@@ -1,64 +1,66 @@
-"use client"
+"use client";
 
-import { useEffect } from "react"
-import { Account } from "@/lib/generated/prisma"
-import useFetch from "@/hooks/useFetch"
+import { useEffect } from "react";
+import { Account } from "@prisma/client";
+import useFetch from "@/hooks/useFetch";
 
-import { toast } from "sonner"
-import { updateDefaultAccount } from "@/actions/account/update-account"
-import AccountCardView from "./AccountCardView"
+import { toast } from "sonner";
+import { updateDefaultAccount } from "@/actions/account/update-account";
+import AccountCardView from "./AccountCardView";
 
 type TAccountProps = {
-  account: Pick<Account, 'id' | 'name' | 'type' | 'balance' | 'currency' | 'isDefault'>
-}
+  account: Pick<
+    Account,
+    "id" | "name" | "type" | "balance" | "currency" | "isDefault"
+  >;
+};
 
 export default function AccountCard({ account }: TAccountProps) {
-  const { id, name, type, balance, currency, isDefault } = account
+  const { id, name, type, balance, currency, isDefault } = account;
 
   const {
     data: updatedAccount,
     func: updateDefaultAccountFn,
     loading: updateDefaultLoading,
-    error
-  } = useFetch(updateDefaultAccount)
+    error,
+  } = useFetch(updateDefaultAccount);
 
-  const handleDefaultAccountChange = async (event: any) => {
-    event.preventDefault()
+  const handleDefaultAccountChange = async (event: React.FormEvent) => {
+    event.preventDefault();
     if (isDefault) {
       toast.warning("There needs to be at least 1 default account", {
         position: "top-center",
-      })
-      return
+      });
+      return;
     }
 
-    await updateDefaultAccountFn(id)
-  }
+    await updateDefaultAccountFn(id);
+  };
 
   //Handling the success event after we updated the default status of an account
   useEffect(() => {
-    if (updatedAccount?.success){
-        toast.success("Default Account Changed", {
-            position: "top-center",
-        })
+    if (updatedAccount?.success) {
+      toast.success("Default Account Changed", {
+        position: "top-center",
+      });
     }
-  }, [updatedAccount, updateDefaultLoading])
+  }, [updatedAccount, updateDefaultLoading]);
 
   //Handling the error event we get while updating the default status of an account
   useEffect(() => {
-    if (error){
-        toast.error(error.message || "An Error Occured", {
-            position: "top-center"
-        })
+    if (error) {
+      toast.error(error.message || "An Error Occured", {
+        position: "top-center",
+      });
     }
-  }, [error])
-
+  }, [error]);
 
   const formatBalance = (balance: any) => {
-    if (typeof balance === 'object' && balance.toNumber) {
-      return balance.toNumber().toFixed(2)
+    if (typeof balance === "object" && balance.toNumber) {
+      return balance.toNumber().toFixed(2);
     }
-    return Number(balance).toFixed(2)
-  }
+    return Number(balance).toFixed(2);
+  };
 
   return (
     <AccountCardView
@@ -71,5 +73,5 @@ export default function AccountCard({ account }: TAccountProps) {
       onDefaultToggle={handleDefaultAccountChange}
       href={`/accounts/${id}`}
     />
-  )
+  );
 }
