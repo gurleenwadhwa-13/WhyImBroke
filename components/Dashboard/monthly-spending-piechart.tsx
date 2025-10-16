@@ -1,56 +1,99 @@
 import React from 'react'
 import { PieChartLabel } from '../ui/piechart-label'
-import {  ChartConfig } from "@/components/ui/chart"
-
-const chartData = [
-  { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
-  { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
-  { browser: "firefox", visitors: 187, fill: "var(--color-firefox)" },
-  { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
-  { browser: "other", visitors: 90, fill: "var(--color-other)" },
-]
+import { ChartConfig } from "@/components/ui/chart"
+import { MonthlySpendingData } from '@/lib/types/transaction'
 
 const chartConfig = {
-  visitors: {
-    label: "Visitors",
+  amount: {
+    label: "Amount"
   },
-  chrome: {
-    label: "Chrome",
-    color: "var(--chart-1)",
+  housing: {
+    label: "Housing",
+    color: "var(--chart-1)"
   },
-  safari: {
-    label: "Safari",
+  transportation: {
+    label: "Transportation",
     color: "var(--chart-2)",
   },
-  firefox: {
-    label: "Firefox",
+  groceries: {
+    label: "Groceries",
     color: "var(--chart-3)",
   },
-  edge: {
-    label: "Edge",
+  utilities: {
+    label: "Utilities",
     color: "var(--chart-4)",
   },
-  other: {
-    label: "Other",
+  entertainment: {
+    label: "Entertainment",
     color: "var(--chart-5)",
   },
+  food: {
+    label: "Food",
+    color: "var(--chart-6)"
+  },
+  shopping: {
+    label: "Shopping",
+    color: "var(--chart-7)",
+  },
+  healthcare: {
+    label: "Healthcare",
+    color: "var(--chart-8)",
+  },
+  education: {
+    label: "Education",
+    color: "var(--chart-9)",
+  },
+  personal: {
+    label: "Personal",
+    color: "var(--chart-10)",
+  },
+  travel: {
+    label: "Travel",
+    color: "var(--chart-11)",
+  },
+  insurance: {
+    label: "Insurance",
+    color: "var(--chart-12)",
+  },
+  gifts: {
+    label: "Gifts and Donations",
+    color: "var(--chart-13)",
+  },
+  bills: {
+    label: "Bills and Fees",
+    color: "var(--chart-14)",
+  },
+  otherExpenses: {
+    label: "Other Expenses",
+    color: "var(--chart-15)",
+  }
 } satisfies ChartConfig
 
-export const MonthlySpendingPieChart = () => {
+interface MonthlySpendingDataProps {
+  categoryData?: MonthlySpendingData[]
+}
+
+export const MonthlySpendingPieChart = ({ categoryData } : MonthlySpendingDataProps) => {
+  if (!categoryData?.length) return null
+
+  // Dynamically add colors to match config
+  const PieChartData: MonthlySpendingData[] = categoryData?.map((item) => ({
+    ...item,
+    fill: `var(--color-${item?.category.toLowerCase()})`,
+  }))
+
   return (
-    <div className='flex-auto rounded-lg'>
-        {/* <div className='h-64 flex items-center justify-center text-muted-foreground'>
-            <div className='w-full h-full'> */}
-                <PieChartLabel
-                  title="Monthly Spending"
-                  description="January - June 2024"
-                  chartData={chartData}
-                  chartConfig={chartConfig}
-                  dataKey="visitors"
-                  nameKey="category"
-                />
-            {/* </div>
-        </div> */}
+    <div className='flex mx-auto flex-auto rounded-lg h-117.5 space-y-3'>
+      <div className='w-full h-full'>
+          <PieChartLabel
+            title="Monthly Spending"
+            description="January - June 2024"
+            chartData={PieChartData}
+            chartConfig={chartConfig}
+            dataKey="amount"
+            nameKey="category"
+          />
+      </div>
     </div>
   )
 }
