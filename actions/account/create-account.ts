@@ -1,9 +1,8 @@
 "use server"
 
-import { Prisma } from "@/lib/generated/prisma"
-
-import { serializePrisma } from "@/lib/helpers/prisma-helpers";
+import { Prisma } from "@prisma/client";
 import db  from "@/lib/prisma";
+import { serializePrisma } from "@/lib/helpers/prisma-helpers";
 
 import { auth } from "@clerk/nextjs/server"
 import { revalidatePath } from "next/cache";
@@ -26,7 +25,7 @@ export async function createAccount(data: CreateAccountInputType){
         if(!user) throw new Error("User not found");
 
         const balanceFloat = parseFloat(data.balance?.toString() ?? "0");
-        console.log(balanceFloat);
+
         if(isNaN(balanceFloat)){
             throw new Error("Invalid balance amount")
         }
@@ -36,8 +35,6 @@ export async function createAccount(data: CreateAccountInputType){
         const existingAccounts = await db.account.findMany({
             where: { userId: user.id }
         })
-
-        console.log("existingAccount: \n" + existingAccounts);
 
         const shouldBeDefault = existingAccounts.length === 0 ? true : data.isDefault;
 
