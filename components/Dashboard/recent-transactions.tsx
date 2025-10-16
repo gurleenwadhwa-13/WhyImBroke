@@ -36,7 +36,7 @@ export function RecentTransactionsSummary({ transactions }: { transactions: Rece
                 </CardTitle>
             </CardHeader>
             <CardContent>
-                <div className="h-100 overflow-y-auto space-y-3 pr-2">
+                <div className="h-90 overflow-y-auto space-y-3 pr-2">
                     {transactions.map((transaction) => (
                         <div key={transaction.id} className="flex items-center justify-between p-2 rounded-lg bg-muted/50">
                             <div className="flex items-center gap-3">
