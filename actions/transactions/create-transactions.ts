@@ -2,7 +2,7 @@
 
 import db from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
-import { Prisma } from "@/lib/generated/prisma";
+import { Prisma } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
 type CreateTransactionType = Prisma.TransactionUncheckedCreateInput
