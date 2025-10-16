@@ -58,9 +58,6 @@ export async function submitToWaitlist(email: string) {
       throw new Error(`Resend contact creation failed: ${(err as Error).message}`);
       }
 
-      console.log("new contact created below");
-      console.log(newContact);
-
       //We now update our db entry with the resendContactId and more details
       await tx.waitlistEntry.update({
         where: { id: new_waitlist_user.id },
