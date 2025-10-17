@@ -63,11 +63,21 @@
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
+  --chart-1: #4f46e5; /* Housing */
+  --chart-2: #22c55e; /* Transportation */
+  --chart-3: #f97316; /* Groceries */
+  --chart-4: #06b6d4; /* Utilities */
+  --chart-5: #ec4899; /* Entertainment */
+  --chart-6: #eab308; /* Food */
+  --chart-7: #3b82f6; /* Shopping */
+  --chart-8: #ef4444; /* Healthcare */
+  --chart-9: #14b8a6; /* Education */
+  --chart-10: #a855f7; /* Personal */
+  --chart-11: #0ea5e9; /* Travel */
+  --chart-12: #f59e0b; /* Insurance */
+  --chart-13: #84cc16; /* Gifts */
+  --chart-14: #64748b; /* Bills */
+  --chart-15: #d946ef; /* Other Expenses */
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
@@ -97,11 +107,22 @@
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
+  /* Chart palette – Dark Mode (shifted/brighter for contrast) */
+  --chart-1: #f87171; /* red-400 */
+  --chart-2: #fb923c; /* orange-400 */
+  --chart-3: #a3e635; /* lime-400 */
+  --chart-4: #22d3ee; /* cyan-400 */
+  --chart-5: #a78bfa; /* violet-400 */
+  --chart-6: #fb7185; /* rose-400 */
+  --chart-7: #f472b6; /* pink-400 */
+  --chart-8: #2dd4bf; /* teal-400 */
+  --chart-9: #818cf8; /* indigo-400 */
+  --chart-10: #e879f9; /* fuchsia-400 */
+  --chart-11: #38bdf8; /* sky-400 */
+  --chart-12: #94a3b8; /* slate-400 */
+  --chart-13: #f9a8d4; /* pink-300 */
+  --chart-14: #fda4af; /* rose-300 */
+  --chart-15: #cbd5e1; /* slate-300 */
   --sidebar: oklch(0.205 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
   --sidebar-primary: oklch(0.488 0.243 264.376);

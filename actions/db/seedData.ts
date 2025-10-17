@@ -1,6 +1,6 @@
 "use server";
 
-import { Prisma, TransactionType } from "@/lib/generated/prisma";
+import { Prisma, TransactionType } from "@prisma/client";
 import db from "@/lib/prisma";
 import { subDays } from "date-fns";
 

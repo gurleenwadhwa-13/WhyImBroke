@@ -3,7 +3,7 @@
 
 import { usePathname } from "next/navigation"
 
-import { AppSidebar, pathMappings } from "@/components/app-sidebar";
+import { AppSidebar, pathMappings } from "@/components/Sidebar/app-sidebar";
 import { Separator } from "@/components/ui/separator";
 import { SiteHeader } from "../site-header";
 import {

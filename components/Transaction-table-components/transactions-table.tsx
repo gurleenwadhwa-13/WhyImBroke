@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect, useMemo } from 'react'
-import { Transaction } from '@/lib/generated/prisma'
+import { Transaction } from '@prisma/client'
 import { format } from 'date-fns'
 
 import {
@@ -146,7 +146,6 @@ const TransactionsTable = ({ transactions }: { transactions: Transaction[]} ) =>
         setSelectedIds([]);
     }else {
         const allIdsArr = transactions.map(t => t.id);
-        console.log(allIdsArr);
         setSelectedIds(allIdsArr);
     }
   }
@@ -354,7 +353,7 @@ const TransactionsTable = ({ transactions }: { transactions: Transaction[]} ) =>
                                 {transaction.category}
                             </span>
                         </TableCell>
-                        <TableCell className="pr-4" style={{color: transaction.type === "EXPENSE" ? "red" : "green"}}>
+                        <TableCell className="pr-4" style={{color: transaction.type === "EXPENSE" ? "gray" : "green"}}>
                             {transaction.type === "EXPENSE" ? "-" : "+"}
                             ${transaction.amount.toFixed(2)}
                         </TableCell>

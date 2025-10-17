@@ -1,4 +1,4 @@
-import { Transaction } from '@/lib/generated/prisma'
+import { Transaction } from '@prisma/client'
 import { format } from 'date-fns'
 
 import { Badge } from '@/components/ui/badge'

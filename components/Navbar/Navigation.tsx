@@ -10,9 +10,13 @@ import { Toaster } from "@/components/ui/sonner";
 const DASHBOARD_ROUTES = [
   '/dashboard',
   '/accounts',
-  '/transactions', 
+  '/transactions',
   '/budgets',
-  '/settings'
+  '/analytics',
+  '/settings',
+  '/reports/view',
+  '/reports/monthly',
+  '/export',
 ];
 
 // Define public routes that should show the landing page even when signed in
@@ -25,7 +29,6 @@ const PUBLIC_ROUTES = [
 
 const Navigation = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
-  
   const isDashboardRoute = DASHBOARD_ROUTES.some(route => pathname.startsWith(route));
   const isPublicRoute = PUBLIC_ROUTES.includes(pathname);
 

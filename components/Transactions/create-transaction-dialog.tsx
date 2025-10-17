@@ -10,8 +10,7 @@ import { format } from "date-fns"
 //imported Zod Schemas and Prisma Types:
 import { TransactionInputSchema } from "@/lib/zod/TransactionSchemas/transactionSchema";
 import type { TransactionInputSchemaType } from "@/lib/zod/TransactionSchemas/transactionSchema";
-import { Account } from "@/lib/generated/prisma"
-import { TransactionType, RecurringIntervalList } from "@/lib/generated/prisma"
+import { Account, TransactionType, RecurringIntervalList } from "@prisma/client"
 
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";

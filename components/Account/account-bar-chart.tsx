@@ -1,7 +1,7 @@
 "use client"
 
 import { useMemo, useState } from "react"
-import { type Transaction } from "@/lib/generated/prisma"
+import { type Transaction} from "@prisma/client"
 import { endOfDay, format, startOfDay, subDays } from "date-fns"
 
 // UI element imports

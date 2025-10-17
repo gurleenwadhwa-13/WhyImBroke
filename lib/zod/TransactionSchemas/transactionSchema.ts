@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { TransactionType, RecurringIntervalList } from "@/lib/generated/prisma";
+import { TransactionType, RecurringIntervalList } from "@prisma/client";
 
 const income_categories = ["salary", "freelance", "investments", "other income"];
 const expense_categories = ["housing", "transportation", "groceries", "entertainment", "food", "shopping", "healthcare", "education", "travel"];
