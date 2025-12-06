@@ -1,0 +1,59 @@
+name: Bug Report
+description: Report a bug or unintended behavior in the application.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug! Please fill out the form below so we can help quickly.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the issue
+      description: What happened? What were you expecting instead?
+      placeholder: When I click X on the dashboard, Y happens...
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open the Dashboard
+        2. Go to Accounts
+        3. Click Connect Bank
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      placeholder: What should have happened instead?
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, Browser, Node version, etc.
+      placeholder: macOS, Chrome 120, Node 18
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots or videos (optional)
+
+  - type: dropdown
+    id: assign
+    attributes:
+      label: Would you like to work on this issue?
+      options:
+        - "Yes"
+        - "No"
+
+  - type: markdown
+    attributes:
+      value: |
+        Thanks! We’ll review this shortly.
