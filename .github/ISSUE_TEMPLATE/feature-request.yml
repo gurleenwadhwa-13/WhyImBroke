@@ -1,0 +1,69 @@
+name: Feature Request
+description: Suggest new functionality or improvements to the app.
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve the project! Please describe your feature idea clearly so we can evaluate it properly.
+
+  - type: input
+    id: summary
+    attributes:
+      label: Short summary
+      description: A one-sentence description of the feature.
+      placeholder: Add dark mode for the dashboard
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this feature solve?
+      description: Describe the pain point or limitation users are experiencing.
+      placeholder: Users struggle to read the dashboard at night due to bright colors.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Explain the feature idea. Include behavior, design ideas, or examples.
+      placeholder: Introduce a toggle to switch to a dark color palette on all pages.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Mention any alternative solutions you've thought about.
+      placeholder: Maybe automatically switching based on system theme.
+  
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impact / value
+      description: Explain who benefits and why this feature matters.
+      placeholder: Helps nighttime users and improves accessibility.
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional context
+      description: Add mockups, links, or extra notes.
+      placeholder: Add screenshots, sketches, or example apps here.
+
+  - type: dropdown
+    id: assign
+    attributes:
+      label: Would you like to work on this feature?
+      options:
+        - "Yes"
+        - "No"
+
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for contributing to the roadmap!
