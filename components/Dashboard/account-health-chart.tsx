@@ -228,7 +228,3 @@ function DemoWrapper() {
     </div>
   );
 }
-
-// Render the demo by default
-const App = () => <DemoWrapper />;
-export default App;
